@@ -331,15 +331,71 @@
             }
 
 
-// Drawing a legend manually:
+// Drawing a legend manually (Ordering by population sizes):
             function drawlegend(){
+
+        // Initialize + White Ethnicity
                 var legend = d3.select("#legend")
                     .append("svg")
-                    .attr("width", 180)
+                    .attr("width", 350)
                     .attr("height", 50)
                     .append("g")
-                    .attr("class", "otherEth")
+                    .attr("class", "whiteEth")
                     .attr("transform","translate(30,0)");
+
+                legend.append("rect")
+                    .attr("width", 30)
+                    .attr("height", 20);
+                
+                legend.append("line")
+                    .attr("x2", 30);
+                
+                legend.append("text")
+                    .text("White")
+                    .attr("x",35)
+                    .attr("y",13);
+
+        // Hispanic Ethnicity
+                var legend = d3.select("#legend svg")
+                    .append("g")
+                    .attr("class", "hispEth")
+                    .attr("transform","translate(100,0)");
+                
+                legend.append("rect")
+                    .attr("width", 30)
+                    .attr("height", 20);
+                
+                legend.append("line")
+                    .attr("x2", 30);
+                
+                legend.append("text")
+                    .text("Hispanic")
+                    .attr("x",35)
+                    .attr("y",13);
+
+        // Black Ethnicity
+            var legend = d3.select("#legend svg")
+                    .append("g")
+                    .attr("class", "blackEth")
+                    .attr("transform","translate(190,0)");
+                
+                legend.append("rect")
+                    .attr("width", 30)
+                    .attr("height", 20);
+                
+                legend.append("line")
+                    .attr("x2", 30);
+                
+                legend.append("text")
+                    .text("Black")
+                    .attr("x",35)
+                    .attr("y",13);
+
+        // Other Ethnicity
+                var legend = d3.select("#legend svg")
+                    .append("g")
+                    .attr("class", "otherEth")
+                    .attr("transform","translate(270,0)");
                 
                 legend.append("rect")
                     .attr("width", 30)
@@ -350,23 +406,6 @@
                 
                 legend.append("text")
                     .text("Other")
-                    .attr("x",35)
-                    .attr("y",13);
-                
-                var legend = d3.select("#legend svg")
-                    .append("g")
-                    .attr("class", "white")
-                    .attr("transform","translate(110,0)");
-                
-                legend.append("rect")
-                    .attr("width", 30)
-                    .attr("height", 20);
-                
-                legend.append("line")
-                    .attr("x2", 30);
-                
-                legend.append("text")
-                    .text("White")
                     .attr("x",35)
                     .attr("y",13);
             }

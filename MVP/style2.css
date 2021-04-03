@@ -55,49 +55,49 @@ path.line{
 
 /* Ethnicity Specific CSS */
 .otherEth path.line, .otherEth line{
-  stroke: #418FC6;
+  stroke: #E7298A;
 }
 .whiteEth path.line, .whiteEth line{
-  stroke: #E3314C;
+  stroke: #1B9E77;
 }
 .blackEth path.line, .blackEth line{
-  stroke: #E3314C;
+  stroke: #D95F02;
 }
 .hispEth path.line, .hispEth line{
-  stroke: #E3314C;
+  stroke: #7570B3;
 }
 
 g.otherEth circle{
-  fill: #418FC6;
+  fill: #E7298A;
   transition: 0.1s;
 }
 g.whiteEth circle{
-  fill: #E3314C;
+  fill: #1B9E77;
   transition: 0.1s;
 }
 g.blackEth circle{
-  fill: #E3314C;
+  fill: #D95F02;
   transition: 0.1s;
 }
 g.hispEth circle{
-  fill: #E3314C;
+  fill: #7570B3;
   transition: 0.1s;
 }
 
 .otherEth .area, .otherEth rect{
-  fill: #418FC6;
+  fill: #E7298A;
   opacity: 0.2;
 }
 .whiteEth .area, .whiteEth rect{
-  fill: #E3314C;
+  fill: #1B9E77;
   opacity: 0.2;
 }
 .blackEth .area, .blackEth rect{
-  fill: #E3314C;
+  fill: #D95F02;
   opacity: 0.2;
 }
 .hispEth .area, .hispEth rect{
-  fill: #E3314C;
+  fill: #7570B3;
   opacity: 0.2;
 }
 rect.bg{
@@ -105,16 +105,16 @@ rect.bg{
 }
 
 .otherEth .label{
-  fill: #418FC6;
+  fill: #E7298A;
 }
 .whiteEth .label{
-  fill: #E3314C;
+  fill: #1B9E77;
 }
 .blackEth .label{
-  fill: #E3314C;
+  fill: #D95F02;
 }
 .hispEth .label{
-  fill: #E3314C;
+  fill: #7570B3;
 }
 .label{
   font-family: 'Roboto', sans-serif;
@@ -123,22 +123,24 @@ rect.bg{
 
 
 .otherEth text.caption{
-  fill: #418FC6;
+  fill: #E7298A;
   font-size: 10px;
 }
 .whiteEth text.caption{
-  fill: #E3314C;
+  fill: #1B9E77;
+  font-size: 10px;
+}
+.blackEth text.caption{
+  fill: #D95F02;
   font-size: 10px;
 }
 .hispEth text.caption{
-  fill: #E3314C;
+  fill: #7570B3;
   font-size: 10px;
 }
 
-.blackEth text.caption{
-  fill: #E3314C;
-  font-size: 10px;
-}
+
+
 .tick text{
   text-anchor: end;
 }
