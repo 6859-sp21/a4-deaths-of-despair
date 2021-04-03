@@ -1,0 +1,120 @@
+body{
+  font-family: 'Open Sans', sans-serif;
+}
+h2{
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  margin: 60px;
+}
+.main{
+  margin: auto;
+}
+.para{
+  text-align: justify;
+}
+.source{
+  font-size: 14px;
+  margin-top: 80px;
+}
+a:link, a:visited{
+  text-decoration: none;
+  color: #418FC6;
+}
+.model{
+  font-family: 'Roboto', sans-serif;
+  color: #444;
+}
+.title{
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+svg text{
+  fill: #444;
+  font-size: 11px;
+}
+.y.axis path{
+  fill: none;
+  stroke: none;
+  shape-rendering: crispEdges;
+}
+.axis line {
+  fill: none;
+  stroke: #999;
+  shape-rendering: crispEdges;
+}
+line{
+  fill: none;
+  stroke-width: 3px;
+}
+path.line{
+  fill: none;
+  stroke-width: 1.5px;
+  transition: 0.1s;
+}
+.bmw path.line, .bmw line{
+  stroke: #418FC6;
+}
+.audi path.line, .audi line{
+  stroke: #E3314C;
+}
+g.bmw circle{
+  fill: #418FC6;
+  transition: 0.1s;
+}
+g.audi circle{
+  fill: #E3314C;
+  transition: 0.1s;
+}
+.bmw .area, .bmw rect{
+  fill: #418FC6;
+  opacity: 0.2;
+}
+.audi .area, .audi rect{
+  fill: #E3314C;
+  opacity: 0.2;
+}
+rect.bg{
+  fill: #fff;
+}
+.bmw .label{
+  fill: #418FC6;
+}
+.audi .label{
+  fill: #E3314C;
+}
+.label{
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+}
+.bmw text.caption{
+  fill: #418FC6;
+  font-size: 10px;
+}
+.audi text.caption{
+  fill: #E3314C;
+  font-size: 10px;
+}
+.tick text{
+  text-anchor: end;
+}
+button{
+  background: #fff;
+  color: #E3314C;
+  border: 1px solid #E3314C;
+  padding: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 4px;
+  outline: none;
+  margin-right: 10px;
+  font-size: 12px;
+}
+button:hover{
+  background: #ffcccc;
+  cursor: pointer;
+}
+button.selected{
+  background: #E3314C;
+  color: #fff;
+}

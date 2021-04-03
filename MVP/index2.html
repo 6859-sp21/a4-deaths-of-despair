@@ -1,0 +1,333 @@
+<!--ALL CODE ADAPTED FROM: https://bl.ocks.org/suneric1/c5432c5ecd181dc8b4fe -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="style2.css">
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:900' rel='stylesheet' type='text/css'>
+		<title>Deaths of Despair by Race and Age in the U.S.</title>
+
+	</head>
+	<body>
+
+		<h2>Deaths of Despair by Race and Age in the U.S.</h2>
+        <div class="main">
+            <div class="row col-sm-10 col-sm-offset-2" id="legend"></div>
+            <div class="row col-sm-10 col-sm-offset-2" id="lineChart"></div>
+            
+            <div class="row col-sm-10 col-sm-offset-2">
+
+            <p class="source"><span style="font-family: 'Roboto', sans-serif; font-size:16px;">Source</span></br>
+				<span style="font-family: 'Roboto', sans-serif; font-size:14px;">Data:</span>
+				<a href="https://www.cdc.gov/nchs/nvss/deaths.htm">NVSS Mortality Data: 2009-2019</a></br>
+				<span style="font-family: 'Roboto', sans-serif; font-size:14px;">Methodology:</span>
+				<a href="https://doi.org/10.1073/pnas.1518393112">Case, Anne, and Angus Deaton. “Rising Morbidity and Mortality in Midlife among White Non-Hispanic Americans in the 21st Century.” 
+																  Proceedings of the National Academy of Sciences 112, no. 49 (December 8, 2015): 15078–83.</a></br>
+				<span style="font-family: 'Roboto', sans-serif; font-size:14px;">Code adapted from:</span>
+				<a href="https://bl.ocks.org/suneric1/c5432c5ecd181dc8b4fe">Zhiming Sun’s Block c5432c5ecd181dc8b4fe</a></br>
+
+            </p>
+            </div>
+		  </div>
+		
+
+	</body>
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>		
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stupidtable/0.0.1/stupidtable.min.js"></script>
+
+		<!-- load the function file you need before you call it... -->
+		<!-- script type="text/javascript" src="js/tabulate.js"></script -->
+
+		<script type="text/javascript">
+            
+            var fullHeight = 140;
+            var fullWidth = 300;
+            
+            var margin = {top:30, bottom:30, left:30, right:30};
+            
+            var height = fullHeight - margin.top - margin.bottom;
+            var width = fullWidth - margin.left - margin.right;
+            
+            xScale = d3.time.scale().range([0,width]);
+            yScale = d3.scale.linear().range([height,0]);
+            
+            var parseDate = d3.time.format("%Y").parse;
+            var outputDate = d3.time.format("%Y");
+
+            var bisect = d3.bisector(function(d) {
+                return parseDate(d.year);
+            }).left;
+            
+            var yAxis = d3.svg.axis()
+                .scale(yScale)
+                .orient("left")
+                .tickFormat(d3.format("s"))
+                .ticks(3)
+                .tickPadding([3])
+                .tickSize([0]);
+            
+            var area = d3.svg.area()
+                .x(function(d){
+                    return xScale(parseDate(d.year));
+                })
+                .y0(height)
+                .y1(function(d){
+                    return yScale(+d.amount);
+                });
+            
+            var line = d3.svg.line()
+                .x(function(d){
+                    return xScale(parseDate(d.year));
+                })
+                .y(function(d){
+                    return yScale(+d.amount);
+                });
+
+            drawlegend();
+
+// LOAD THE DATA:
+            d3.csv("DOD_RaceAndAge.csv", function(error, data) {
+                
+				if (error) {
+					console.log("Had an error loading file.");
+				}
+
+                var years = d3.keys(data[0]).slice(0,5);
+                
+                var dataset = [];
+                
+                data.forEach(function(d,i){
+                    var vehicleSales = [];
+                    years.forEach(function(y){
+                        if(d[y]){
+                            vehicleSales.push({
+                                model: d.group,
+                                year: y,
+                                amount: +d[y]
+                            });
+                        }
+                        else{
+                            vehicleSales.push({
+                                model: d.group,
+                                year: y,
+                                amount: 0
+                            });
+                        }
+                    });
+                    
+                    dataset.push({
+                        model: d.group,
+                        sales: vehicleSales
+                    });
+                });
+
+				
+// SET THE SCALES
+                xScale.domain(d3.extent(years, function(d){
+                    return parseDate(d);
+                }));
+                
+                yScale.domain([0, d3.max(dataset, function(d){
+                    return d3.max(d.sales, function(d){
+                        return +d.amount;
+                    });
+                })*1.1]);
+    
+// JOIN THE DATA TO THE NODES:
+                var svg = d3.select("#lineChart").selectAll("svg")
+                    .data(dataset)
+                    .enter()
+                    .append("svg")
+                    .attr("class","lineChart")
+                    .attr("width",fullWidth)
+                    .attr("height",fullHeight)
+                    .append("g")
+                    .attr("transform","translate(" + margin.left + "," + margin.top + ")")
+                    .each(multiple);
+                
+                function multiple(model){
+                    
+                    d3.select(this.parentNode)
+                        .attr("class",function(d){
+                        if(d.model.startsWith("A") || d.model.startsWith("Q"))
+                            return "audi";
+                        else 
+                            return "bmw";
+                        });
+                    
+                    var svg = d3.select(this)
+                        .append("g")
+                        .attr("class",function(d){
+                        if(d.model.startsWith("A") || d.model.startsWith("Q"))
+                            return "audi line";
+                        else 
+                            return "bmw line";
+                        });
+                    
+                    svg.append("text")
+                          .attr("class", "label")
+                          .attr("x", width/2)
+                          .attr("y", -10)
+                          .style("text-anchor", "middle")
+                          .text(function(d) { return d.model; });
+                    
+                    svg.datum(function(d){return d.sales;})
+                        .append("path")
+                        .attr("class","area")
+                        .attr("d",area);
+                    
+                    svg
+                        .append("path")
+                        .attr("class","line")
+                        .attr("d",line);
+        
+                    d3.select(this).append("g")
+                        .call(yAxis)
+                        .attr("class","y axis lineChart")
+                        .selectAll("text")
+                        .style("text-anchor","end");
+
+                    svg.append("text")
+                        .attr("x", width/2)
+                        .attr("y", function(d){
+                            return yScale(+d[d.length - 1].amount);
+                        })
+                        .attr("class", "label")
+                        .style("text-anchor","start")
+                        .attr("dx",8)
+                        .attr("dy",4);
+                    
+                    svg.append("text")
+                      .attr("x", 0)
+                      .attr("y", height + margin.bottom/2)
+                        .attr("class", "static_year")
+                      .style("text-anchor", "start")
+                      .text(function(d) { return outputDate(parseDate(d[0].year)); });
+
+                    svg.append("text")
+                      .attr("x", width)
+                      .attr("y", height + margin.bottom/2)
+                        .attr("class", "static_year")
+                      .style("text-anchor", "end")
+                      .text(function(d) { return outputDate(parseDate(d[d.length - 1].year));});
+
+                        
+
+                    circle = svg.append("circle")
+                        .attr("r", 2.2)
+                        .attr("opacity", 0)
+                        .style("pointer-events", "none");
+                    
+                    caption = svg.append("text")
+                        .attr("class", "caption")
+                        .attr("text-anchor", "middle")
+                        .style("pointer-events", "none")
+                        .attr("dy", -6);
+                    
+                    curYear = svg.append("text")
+                        .attr("class", "year")
+                        .attr("text-anchor", "middle")
+                        .style("pointer-events", "none")
+                        .attr("dy", margin.bottom/2)
+                        .attr("y", height);
+
+                    svg.append("rect")
+                        .attr("class", "bg")
+                        .attr("width",width)
+                        .attr("height",height)
+                        .on("mouseover",mouseOverFunc)
+                        .on("mousemove",mouseMoveFunc)
+                        .on("mouseout",mouseOutFunc);
+                }
+                
+            });
+            
+
+// INTERACTIVITY:
+
+            function mouseOverFunc(d){
+                d3.selectAll("circle").attr("opacity", 1.0);
+                d3.selectAll(".static_year").classed("hidden", true);
+                return mouseMoveFunc.call(this);
+            }
+            
+            function mouseMoveFunc() {
+              var date, index, year;
+              year = xScale.invert(d3.mouse(this)[0] + 30).getFullYear();
+              date = parseDate('' + year);
+              index = 0;
+              d3.selectAll("circle")
+                .attr("cx", xScale(date))
+                .attr("cy", function(c) {
+                index = bisect(c, date, 0, c.length - 1);
+                return yScale(c[index].amount);
+              });
+              d3.selectAll("text.caption")
+                  .attr("x", xScale(date))
+                  .attr("y", function(c) {
+                    return yScale(c[index].amount);
+                    })
+                  .text(function(c) {
+                        return c[index].amount;
+                    });
+              d3.selectAll("text.year")
+                  .attr("x", xScale(date))
+                  .text(year);
+            };
+            
+            function mouseOutFunc(d){
+                d3.selectAll(".static_year").classed("hidden", false);
+                d3.selectAll("circle").attr("opacity", 0);
+                d3.selectAll("text.caption").text("");
+                d3.selectAll("text.year").text("");
+            }
+
+
+// LEGEND:
+            function drawlegend(){
+                var legend = d3.select("#legend")
+                    .append("svg")
+                    .attr("width", 180)
+                    .attr("height", 50)
+                    .append("g")
+                    .attr("class", "bmw")
+                    .attr("transform","translate(30,0)");
+                
+                legend.append("rect")
+                    .attr("width", 30)
+                    .attr("height", 20);
+                
+                legend.append("line")
+                    .attr("x2", 30);
+                
+                legend.append("text")
+                    .text("BMW")
+                    .attr("x",35)
+                    .attr("y",13);
+                
+                var legend = d3.select("#legend svg")
+                    .append("g")
+                    .attr("class", "audi")
+                    .attr("transform","translate(110,0)");
+                
+                legend.append("rect")
+                    .attr("width", 30)
+                    .attr("height", 20);
+                
+                legend.append("line")
+                    .attr("x2", 30);
+                
+                legend.append("text")
+                    .text("Audi")
+                    .attr("x",35)
+                    .attr("y",13);
+            }
+            
+		</script>
+
+</html>
