@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="style2.css">
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Roboto:900' rel='stylesheet' type='text/css'>
-		<title>Deaths of Despair by Race and Age in the U.S.</title>
+		<title>Deaths of Despair</title>
 
 	</head>
 
@@ -21,10 +21,10 @@
 
              <!-- Legend and Line Plot -->
 
-            <div class="row col-sm-10 col-sm-offset-2" id="legend"></div>
-            <div class="row col-sm-10 col-sm-offset-2" id="lineChart"></div>
+            <div class="row col-sm-10 col-sm-offset-1" id="legend"></div>
+            <div class="row col-sm-10 col-sm-offset-1" id="lineChart"></div>
             
-            <div class="row col-sm-10 col-sm-offset-2">
+            <div class="row col-sm-10 col-sm-offset-1">
 
                 <!-- Text to cite data sources -->
             <p class="source"><span style="font-family: 'Roboto', sans-serif; font-size:16px;">Source</span></br>
@@ -111,15 +111,16 @@
             drawlegend();
 
 
-    // Loading the Data and Transforming it into arrays
+    // Loading the Data and transforming it into arrays
 
             d3.csv("DOD_RaceAndAge.csv", function(error, data) {
                 
 				if (error) {
 					console.log("Had an error loading file.");
 				}
-
-                var years = d3.keys(data[0]).slice(0,10);
+                
+                // This controls how many years are shown (in part)
+                var years = d3.keys(data[0]).slice(0,9);
                 
                 var dataset = [];
                 
@@ -242,6 +243,7 @@
                         .attr("dx",8)
                         .attr("dy",4);
                 
+
         // Sets the start and year dates for the x-axis 
                     svg.append("text")
                       .attr("x", 0)
@@ -257,12 +259,14 @@
                       .style("text-anchor", "end")
                       .text(function(d) { return outputDate(parseDate(d[d.length - 1].year));});
                         
+
         // Creates the dot for the mouseover
                     circle = svg.append("circle")
                         .attr("r", 4)
                         .attr("opacity", 0)
                         .style("pointer-events", "none");
        
+
         // Creates the "amount" and Year captions for the mouseover ?
                     caption = svg.append("text")
                         .attr("class", "caption")
@@ -276,6 +280,7 @@
                         .style("pointer-events", "none")
                         .attr("dy", margin.bottom/2)
                         .attr("y", height);
+        
         
         // Append the mouse-over events
                     svg.append("rect")
