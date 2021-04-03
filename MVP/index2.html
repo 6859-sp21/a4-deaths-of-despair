@@ -11,15 +11,22 @@
 		<title>Deaths of Despair by Race and Age in the U.S.</title>
 
 	</head>
+
+
+    <!-- STRUCTURES ELEMENTS INTO THE HTML -->
 	<body>
 
 		<h2>Deaths of Despair by Race and Age in the U.S.</h2>
         <div class="main">
+
+             <!-- Legend and Line Plot -->
+
             <div class="row col-sm-10 col-sm-offset-2" id="legend"></div>
             <div class="row col-sm-10 col-sm-offset-2" id="lineChart"></div>
             
             <div class="row col-sm-10 col-sm-offset-2">
 
+                <!-- Text to cite data sources -->
             <p class="source"><span style="font-family: 'Roboto', sans-serif; font-size:16px;">Source</span></br>
 				<span style="font-family: 'Roboto', sans-serif; font-size:14px;">Data:</span>
 				<a href="https://www.cdc.gov/nchs/nvss/deaths.htm">NVSS Mortality Data: 2009-2019</a></br>
@@ -36,6 +43,9 @@
 
 	</body>
 
+
+
+<!-- LOAD JAVASCRIPT LIBRARIES -->
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>		
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stupidtable/0.0.1/stupidtable.min.js"></script>
@@ -43,7 +53,12 @@
 		<!-- load the function file you need before you call it... -->
 		<!-- script type="text/javascript" src="js/tabulate.js"></script -->
 
+
+<!-- JAVASCRIPT SECTION -->
+
 		<script type="text/javascript">
+
+        // Setting the height and width parameters
             
             var fullHeight = 140;
             var fullWidth = 300;
@@ -55,9 +70,14 @@
             
             xScale = d3.time.scale().range([0,width]);
             yScale = d3.scale.linear().range([height,0]);
+
+        // Functions to format the data into year
             
             var parseDate = d3.time.format("%Y").parse;
             var outputDate = d3.time.format("%Y");
+
+
+        // Creating the D3 element nodes
 
             var bisect = d3.bisector(function(d) {
                 return parseDate(d.year);
@@ -69,8 +89,8 @@
                 .tickFormat(d3.format("s"))
                 .ticks(3)
                 .tickPadding([3])
-                .tickSize([0]);
-            
+                .tickSize([0]);        
+
             var area = d3.svg.area()
                 .x(function(d){
                     return xScale(parseDate(d.year));
@@ -90,7 +110,9 @@
 
             drawlegend();
 
-// LOAD THE DATA:
+
+        // Loading the Data and Transforming it into arrays
+
             d3.csv("DOD_RaceAndAge.csv", function(error, data) {
                 
 				if (error) {
@@ -102,18 +124,18 @@
                 var dataset = [];
                 
                 data.forEach(function(d,i){
-                    var vehicleSales = [];
+                    var deathsOfDespair = [];
                     years.forEach(function(y){
                         if(d[y]){
-                            vehicleSales.push({
-                                model: d.group,
+                            deathsOfDespair.push({
+                                group: d.group,
                                 year: y,
                                 amount: +d[y]
                             });
                         }
                         else{
-                            vehicleSales.push({
-                                model: d.group,
+                            deathsOfDespair.push({
+                                group: d.group,
                                 year: y,
                                 amount: 0
                             });
@@ -121,24 +143,29 @@
                     });
                     
                     dataset.push({
-                        model: d.group,
-                        sales: vehicleSales
+                        group: d.group,
+                        deaths: deathsOfDespair
                     });
                 });
 
 				
-// SET THE SCALES
+
+        // Creating the reactive scaling functions
+
                 xScale.domain(d3.extent(years, function(d){
                     return parseDate(d);
                 }));
                 
                 yScale.domain([0, d3.max(dataset, function(d){
-                    return d3.max(d.sales, function(d){
+                    return d3.max(d.deaths, function(d){
                         return +d.amount;
                     });
                 })*1.1]);
     
-// JOIN THE DATA TO THE NODES:
+        
+
+        //  Joining the data to the line chart element
+
                 var svg = d3.select("#lineChart").selectAll("svg")
                     .data(dataset)
                     .enter()
@@ -149,12 +176,15 @@
                     .append("g")
                     .attr("transform","translate(" + margin.left + "," + margin.top + ")")
                     .each(multiple);
-                
-                function multiple(model){
+
+
+        // Function that assigns a grouping variable to the data  
+
+                function multiple(group){
                     
                     d3.select(this.parentNode)
                         .attr("class",function(d){
-                        if(d.model.startsWith("A") || d.model.startsWith("Q"))
+                        if(d.group.startsWith("A") || d.group.startsWith("Q"))
                             return "audi";
                         else 
                             return "bmw";
@@ -163,26 +193,27 @@
                     var svg = d3.select(this)
                         .append("g")
                         .attr("class",function(d){
-                        if(d.model.startsWith("A") || d.model.startsWith("Q"))
+                        if(d.group.startsWith("A") || d.group.startsWith("Q"))
                             return "audi line";
                         else 
                             return "bmw line";
                         });
-                    
+        
+        //  Joining the data to the line chart element
+
                     svg.append("text")
                           .attr("class", "label")
                           .attr("x", width/2)
                           .attr("y", -10)
                           .style("text-anchor", "middle")
-                          .text(function(d) { return d.model; });
+                          .text(function(d) { return d.group; });
                     
-                    svg.datum(function(d){return d.sales;})
+                    svg.datum(function(d){return d.deaths;})
                         .append("path")
                         .attr("class","area")
                         .attr("d",area);
                     
-                    svg
-                        .append("path")
+                    svg.append("path")
                         .attr("class","line")
                         .attr("d",line);
         
@@ -215,7 +246,6 @@
                         .attr("class", "static_year")
                       .style("text-anchor", "end")
                       .text(function(d) { return outputDate(parseDate(d[d.length - 1].year));});
-
                         
 
                     circle = svg.append("circle")
@@ -248,7 +278,8 @@
             });
             
 
-// INTERACTIVITY:
+            
+// Creating the Interactivity:
 
             function mouseOverFunc(d){
                 d3.selectAll("circle").attr("opacity", 1.0);
@@ -288,7 +319,7 @@
             }
 
 
-// LEGEND:
+// Drawing a legend manually:
             function drawlegend(){
                 var legend = d3.select("#legend")
                     .append("svg")
