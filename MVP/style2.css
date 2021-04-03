@@ -52,46 +52,90 @@ path.line{
   stroke-width: 1.5px;
   transition: 0.1s;
 }
-.bmw path.line, .bmw line{
+
+/* Ethnicity Specific CSS */
+.otherEth path.line, .otherEth line{
   stroke: #418FC6;
 }
-.audi path.line, .audi line{
+.whiteEth path.line, .whiteEth line{
   stroke: #E3314C;
 }
-g.bmw circle{
+.blackEth path.line, .blackEth line{
+  stroke: #E3314C;
+}
+.hispEth path.line, .hispEth line{
+  stroke: #E3314C;
+}
+
+g.otherEth circle{
   fill: #418FC6;
   transition: 0.1s;
 }
-g.audi circle{
+g.whiteEth circle{
   fill: #E3314C;
   transition: 0.1s;
 }
-.bmw .area, .bmw rect{
+g.blackEth circle{
+  fill: #E3314C;
+  transition: 0.1s;
+}
+g.hispEth circle{
+  fill: #E3314C;
+  transition: 0.1s;
+}
+
+.otherEth .area, .otherEth rect{
   fill: #418FC6;
   opacity: 0.2;
 }
-.audi .area, .audi rect{
+.whiteEth .area, .whiteEth rect{
+  fill: #E3314C;
+  opacity: 0.2;
+}
+.blackEth .area, .blackEth rect{
+  fill: #E3314C;
+  opacity: 0.2;
+}
+.hispEth .area, .hispEth rect{
   fill: #E3314C;
   opacity: 0.2;
 }
 rect.bg{
   fill: #fff;
 }
-.bmw .label{
+
+.otherEth .label{
   fill: #418FC6;
 }
-.audi .label{
+.whiteEth .label{
+  fill: #E3314C;
+}
+.blackEth .label{
+  fill: #E3314C;
+}
+.hispEth .label{
   fill: #E3314C;
 }
 .label{
   font-family: 'Roboto', sans-serif;
   font-size: 11px;
 }
-.bmw text.caption{
+
+
+.otherEth text.caption{
   fill: #418FC6;
   font-size: 10px;
 }
-.audi text.caption{
+.whiteEth text.caption{
+  fill: #E3314C;
+  font-size: 10px;
+}
+.hispEth text.caption{
+  fill: #E3314C;
+  font-size: 10px;
+}
+
+.blackEth text.caption{
   fill: #E3314C;
   font-size: 10px;
 }
