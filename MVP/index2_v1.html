@@ -209,7 +209,7 @@
                         else if (d.group.startsWith("H"))
                             return "hispEth";
                         else
-                            return "otherEth";
+                            return "aapiaiEth";
                         });
 
                     var svg = d3.select(this)
@@ -222,7 +222,7 @@
                         else if (d.group.startsWith("H"))
                             return "hispEth line";
                         else
-                            return "otherEth line";
+                            return "aapiaiEth line";
                         });
 
 
@@ -338,7 +338,7 @@
                     return yScale(c[index].amount);
                     })
                   .text(function(c) {
-                        return c[index].amount;
+                        return Math.round(c[index].amount);
                     });
               d3.selectAll("text.year")
                   .attr("x", xScale(date))
@@ -413,10 +413,10 @@
                     .attr("x",35)
                     .attr("y",13);
 
-        // Other Ethnicity
+        // AAPI & AI Ethnicity
                 var legend = d3.select("#legend svg")
                     .append("g")
-                    .attr("class", "otherEth")
+                    .attr("class", "aapiaiEth")
                     .attr("transform","translate(270,0)");
 
                 legend.append("rect")
@@ -427,7 +427,7 @@
                     .attr("x2", 30);
 
                 legend.append("text")
-                    .text("Other")
+                    .text("AAPI & AI")
                     .attr("x",35)
                     .attr("y",13);
             }

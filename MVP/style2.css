@@ -99,7 +99,7 @@ path.line{
 }
 
 /* Ethnicity Specific CSS */
-.otherEth path.line, .otherEth line{
+.aapiaiEth path.line, .aapiaiEth line{
   stroke: #7A4F6E;
 }
 .whiteEth path.line, .whiteEth line{
@@ -112,7 +112,7 @@ path.line{
   stroke: #095E7F;
 }
 
-g.otherEth circle{
+g.aapiaiEth circle{
   fill: #7A4F6E;
   transition: 0.1s;
 }
@@ -129,7 +129,7 @@ g.hispEth circle{
   transition: 0.1s;
 }
 
-.otherEth .area, .otherEth rect{
+.aapiaiEth .area, .aapiaiEth rect{
   fill: #7A4F6E;
   opacity: 0.2;
 }
@@ -149,7 +149,7 @@ rect.bg{
   fill: #fff;
 }
 
-.otherEth .label{
+.aapiaiEth .label{
   fill: #7A4F6E;
 }
 .whiteEth .label{
@@ -167,7 +167,7 @@ rect.bg{
 }
 
 
-.otherEth text.caption{
+.aapiaiEth text.caption{
   fill: #7A4F6E;
   font-size: 12px;
 }
