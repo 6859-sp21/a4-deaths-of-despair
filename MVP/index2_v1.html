@@ -16,7 +16,7 @@
 	<body>
 
 		<h2>Deaths of Despair by Race and Age in the U.S.</h2>
-        <div class="main" style=" width: 1600px; height: 700px;">
+        <div class="main" style=" width: 1700px; height: 700px;">
 
 					<!---ADD CHART DESCRIPTION-->
 
@@ -76,7 +76,7 @@
 
 						var margin = {
 				      top: 30,
-				      right: 10,
+				      right: 12,
 				      bottom: 40,
 				      left: 25
 				    };
@@ -323,7 +323,7 @@
 
             function mouseMoveFunc() {
               var date, index, year;
-              year = xScale.invert(d3.mouse(this)[0] + 30).getFullYear();
+              year = xScale.invert(d3.mouse(this)[0] + 10).getFullYear();
               date = parseDate('' + year);
               index = 0;
               d3.selectAll("circle")
