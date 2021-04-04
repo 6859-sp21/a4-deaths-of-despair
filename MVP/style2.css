@@ -9,8 +9,51 @@ h2{
 .main{
   margin: auto;
 }
+
+p{
+  font-size: 14px;
+  text-align: center;
+  color: #000;
+  margin-bottom: 50px;
+  margin-left: : 50px;
+}
+footer{
+  text-align: left;
+}
+#button-wrap {
+  width: 220px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 30px;
+  margin-bottom: 10px;
+  padding-left: 5px;
+}
+
+.button {
+  cursor: pointer;
+  float: left;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  background: #fcfcfc;
+  border: 1px solid #cecece;
+  display: block;
+  padding-top: 5px;
+  margin-top: 10px;
+}
+
+.button.active {
+  box-shadow: inset 0px 0px 7px rgba(0,0,0,0.18);
+  pointer-events: none;
+  background-color: #e6e6e6;
+}
+
+
 .para{
   text-align: justify;
+}
+span{
+  margin-bottom: 40
 }
 .source{
   font-size: 14px;
@@ -38,10 +81,12 @@ svg text{
   stroke: none;
   shape-rendering: crispEdges;
 }
-.axis line {
-  fill: none;
-  stroke: #999;
+.axis line, .grid line {
+  stroke-width: .5px;
   shape-rendering: crispEdges;
+  stroke: #fff;
+  opacity: 0.3;
+  pointer-events: none;
 }
 line{
   fill: none;
@@ -55,49 +100,49 @@ path.line{
 
 /* Ethnicity Specific CSS */
 .otherEth path.line, .otherEth line{
-  stroke: #E7298A;
+  stroke: #7A4F6E;
 }
 .whiteEth path.line, .whiteEth line{
-  stroke: #1B9E77;
+  stroke: #4B6830;
 }
 .blackEth path.line, .blackEth line{
-  stroke: #D95F02;
+  stroke: #A56527;
 }
 .hispEth path.line, .hispEth line{
-  stroke: #7570B3;
+  stroke: #095E7F;
 }
 
 g.otherEth circle{
-  fill: #E7298A;
+  fill: #7A4F6E;
   transition: 0.1s;
 }
 g.whiteEth circle{
-  fill: #1B9E77;
+  fill: #739048;
   transition: 0.1s;
 }
 g.blackEth circle{
-  fill: #D95F02;
+  fill: #A56527;
   transition: 0.1s;
 }
 g.hispEth circle{
-  fill: #7570B3;
+  fill: #095E7F;
   transition: 0.1s;
 }
 
 .otherEth .area, .otherEth rect{
-  fill: #E7298A;
+  fill: #7A4F6E;
   opacity: 0.2;
 }
 .whiteEth .area, .whiteEth rect{
-  fill: #1B9E77;
+  fill: #739048;
   opacity: 0.2;
 }
 .blackEth .area, .blackEth rect{
-  fill: #D95F02;
+  fill: #A56527;
   opacity: 0.2;
 }
 .hispEth .area, .hispEth rect{
-  fill: #7570B3;
+  fill: #095E7F;
   opacity: 0.2;
 }
 rect.bg{
@@ -105,38 +150,38 @@ rect.bg{
 }
 
 .otherEth .label{
-  fill: #E7298A;
+  fill: #7A4F6E;
 }
 .whiteEth .label{
-  fill: #1B9E77;
+  fill: #739048;
 }
 .blackEth .label{
-  fill: #D95F02;
+  fill: #A56527;
 }
 .hispEth .label{
-  fill: #7570B3;
+  fill: #095E7F;
 }
 .label{
   font-family: 'Roboto', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 
 .otherEth text.caption{
-  fill: #E7298A;
-  font-size: 10px;
+  fill: #7A4F6E;
+  font-size: 12px;
 }
 .whiteEth text.caption{
-  fill: #1B9E77;
-  font-size: 10px;
+  fill: #739048;
+  font-size: 12px;
 }
 .blackEth text.caption{
-  fill: #D95F02;
-  font-size: 10px;
+  fill: #A56527;
+  font-size: 12px;
 }
 .hispEth text.caption{
-  fill: #7570B3;
-  font-size: 10px;
+  fill: #095E7F;
+  font-size: 12px;
 }
 
 
