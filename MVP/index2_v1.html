@@ -16,7 +16,7 @@
 	<body>
 
 		<h2>Deaths of Despair by Race and Age in the U.S.</h2>
-        <div class="main" style=" width: 1700px; height: 700px;">
+        <div class="main" style=" width: 1700px; height: 700px; margin-bottom: 10px">
 
 					<!---ADD CHART DESCRIPTION-->
 
@@ -29,7 +29,7 @@
 
 						<div id="button-wrap">
 							 <div id= "last" class="button">LAST YEAR</div>
-							 <div id= "age" class ="button active">STATE</div>
+							 <div id= "age" class ="button active">AGE GROUP</div>
 						</div>
 
           <!-- Legend and Line Plot -->
@@ -37,16 +37,16 @@
             <div class="row col-sm-10 col-sm-offset-1" id="legend"></div>
             <div class="row col-sm-10 col-sm-offset-1" id="lineChart"></div>
 
-            <div class="row col-sm-10 col-sm-offset-1">
+            <div class="row col-sm-10 col-sm-offset-1" style="margin-bottom: 50px; margin-top: 0px; margin-left: 150px; margin-right: 150px;">
 
                 <!-- Text to cite data sources -->
-            <footer class="source"><span style="font-family: 'Times', sans-serif; font-size:16px; font-weight: 700">Source</span></br>
-								<span style="font-family: 'Times', sans-serif; font-size:14px; ">Data:</span>
+            <footer class="source" style="margin: 40; text-align: justify;"><span style="font-family: 'Roboto', sans-serif; font-size:16px; font-weight: 700">Source</span></br>
+								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Data:</span>
 										<a href="https://www.cdc.gov/nchs/nvss/deaths.htm">NVSS Mortality Data: 2009-2019</a></br>
-								<span style="font-family: 'Times', sans-serif; font-size:14px; ">Methodology:</span>
+								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Methodology:</span>
 										<a href="https://doi.org/10.1073/pnas.1518393112">Case, Anne, and Angus Deaton. “Rising Morbidity and Mortality in Midlife among White Non-Hispanic Americans in the 21st Century.”
 																  Proceedings of the National Academy of Sciences 112, no. 49 (December 8, 2015): 15078–83.</a></br>
-								<span style="font-family: 'Times', sans-serif; font-size:14px; ">Code adapted from:</span>
+								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Code adapted from:</span>
 										<a href="https://bl.ocks.org/suneric1/c5432c5ecd181dc8b4fe">Zhiming Sun’s Block c5432c5ecd181dc8b4fe</a></br>
             </footer>
             </div>
@@ -126,6 +126,29 @@
                 });
 
             drawlegend();
+
+						function setupIsotope() {
+							$("#vis").isotope({
+								itemSelector: '.chart',
+								layoutMode: 'fitRows',
+								getSortData: {
+									count: function(e) {
+										var d;
+										d = d3.select(e).select("2019");
+										return d.amount;
+									},
+									group: function(e) {
+										var d;
+										d = d3.select(e).datum();
+										return d.key;
+									}
+							}
+						});
+						return $("#vis").isotope({
+							sortBy: 'count'
+						});
+					}
+
 
 
     // Loading the Data and transforming it into arrays
@@ -431,6 +454,18 @@
                     .attr("x",35)
                     .attr("y",13);
             }
+
+						setupIsotope();
+
+    				d3.select("#button-wrap").selectAll("div").on("click", function() {
+      				var id;
+      				id = d3.select(this).attr("id");
+      				d3.select("#button-wrap").selectAll("div").classed("active", false);
+      				d3.select("#" + id).classed("active", true);
+      				return $("#vis").isotope({
+        				sortBy: id
+      						});
+								});
 
 		</script>
 
