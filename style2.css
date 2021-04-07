@@ -21,18 +21,18 @@ footer{
   text-align: left;
 }
 #button-wrap {
-  width: 220px;
+  width: 420px;
   margin-left: auto;
   margin-right: auto;
   height: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   padding-left: 5px;
 }
 
 .button {
   cursor: pointer;
   float: left;
-  width: 100px;
+  width: 200px;
   height: 30px;
   text-align: center;
   background: #fcfcfc;
@@ -193,12 +193,12 @@ button{
   background: #fff;
   color: #E3314C;
   border: 1px solid #E3314C;
-  padding: 7px;
+  padding: 14px;
   padding-top: 5px;
   padding-bottom: 5px;
   border-radius: 4px;
   outline: none;
-  margin-right: 10px;
+  margin-right: 16px;
   font-size: 12px;
 }
 button:hover{
