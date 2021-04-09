@@ -87,7 +87,7 @@
 
     
             // Create variables for each csv
-             var DOD = "DOD_RaceAndAge_rates.csv"
+             var DOD = "DOD_RaceAndAge.csv"
              var nonDOD = "AllOther_RaceAndAge.csv"
              var Total = "Total_RaceAndAge.csv"
             //  var data_4 = "drugs.csv"
@@ -242,7 +242,7 @@
                 
     // Function that assigns a grouping variable to the data
 
-                function multiple(group){
+            function multiple(group){
 
                     d3.select(this.parentNode)
                         .attr("class",function(d){
@@ -252,8 +252,10 @@
                             return "blackEth";
                         else if (d.group.startsWith("H"))
                             return "hispEth";
+                        else if (d.group.startsWith("AA"))
+                            return "aapiEth";
                         else
-                            return "aapiaiEth";
+                            return "aianEth";
                         });
 
                     var svg = d3.select(this)
@@ -265,9 +267,12 @@
                             return "blackEth line";
                         else if (d.group.startsWith("H"))
                             return "hispEth line";
+                        else if (d.group.startsWith("AA"))
+                            return "aapiEth line";
                         else
-                            return "aapiaiEth line";
-                        });
+                            return "aianEth line";
+            });
+
 
 
     //  Joining the data to the line chart element
@@ -401,84 +406,103 @@
         }
 
 // Drawing a legend manually (Ordering by population sizes):
-            function drawlegend(){
+function drawlegend(){
 
-        // Initialize + White Ethnicity
-                var legend = d3.select("#legend")
-                    .append("svg")
-                    .attr("width", 600)
-                    .attr("height", 50)
-                    .append("g")
-                    .attr("class", "whiteEth")
-                    .attr("transform","translate(30,0)");
+            // Initialize + White Ethnicity
+                    var legend = d3.select("#legend")
+                        .append("svg")
+                        .attr("width", 600)
+                        .attr("height", 50)
+                        .append("g")
+                        .attr("class", "whiteEth")
+                        .attr("transform","translate(30,0)");
 
-                legend.append("rect")
-                    .attr("width", 30)
-                    .attr("height", 20);
+                    legend.append("rect")
+                        .attr("width", 30)
+                        .attr("height", 20);
 
-                legend.append("line")
-                    .attr("x2", 30);
+                    legend.append("line")
+                        .attr("x2", 30);
 
-                legend.append("text")
-                    .text("White")
-                    .attr("x",35)
-                    .attr("y",13);
+                    legend.append("text")
+                        .text("White")
+                        .attr("x",35)
+                        .attr("y",13);
 
-        // Hispanic Ethnicity
+            // Hispanic Ethnicity
+                    var legend = d3.select("#legend svg")
+                        .append("g")
+                        .attr("class", "hispEth")
+                        .attr("transform","translate(100,0)");
+
+                    legend.append("rect")
+                        .attr("width", 30)
+                        .attr("height", 20);
+
+                    legend.append("line")
+                        .attr("x2", 30);
+
+                    legend.append("text")
+                        .text("Hispanic")
+                        .attr("x",35)
+                        .attr("y",13);
+
+            // Black Ethnicity
                 var legend = d3.select("#legend svg")
-                    .append("g")
-                    .attr("class", "hispEth")
-                    .attr("transform","translate(100,0)");
+                        .append("g")
+                        .attr("class", "blackEth")
+                        .attr("transform","translate(190,0)");
 
-                legend.append("rect")
-                    .attr("width", 30)
-                    .attr("height", 20);
+                    legend.append("rect")
+                        .attr("width", 30)
+                        .attr("height", 20);
 
-                legend.append("line")
-                    .attr("x2", 30);
+                    legend.append("line")
+                        .attr("x2", 30);
 
-                legend.append("text")
-                    .text("Hispanic")
-                    .attr("x",35)
-                    .attr("y",13);
+                    legend.append("text")
+                        .text("Black")
+                        .attr("x",35)
+                        .attr("y",13);
 
-        // Black Ethnicity
-            var legend = d3.select("#legend svg")
-                    .append("g")
-                    .attr("class", "blackEth")
-                    .attr("transform","translate(190,0)");
+            // AAPI Ethnicity
+                    var legend = d3.select("#legend svg")
+                        .append("g")
+                        .attr("class", "aapiEth")
+                        .attr("transform","translate(270,0)");
 
-                legend.append("rect")
-                    .attr("width", 30)
-                    .attr("height", 20);
+                    legend.append("rect")
+                        .attr("width", 30)
+                        .attr("height", 20);
 
-                legend.append("line")
-                    .attr("x2", 30);
+                    legend.append("line")
+                        .attr("x2", 30);
 
-                legend.append("text")
-                    .text("Black")
-                    .attr("x",35)
-                    .attr("y",13);
+                    legend.append("text")
+                        .text("AAPI")
+                        .attr("x",35)
+                        .attr("y",13);
 
-        // AAPI & AI Ethnicity
-                var legend = d3.select("#legend svg")
-                    .append("g")
-                    .attr("class", "aapiaiEth")
-                    .attr("transform","translate(270,0)");
+            // AIAN Ethnicity
 
-                legend.append("rect")
-                    .attr("width", 30)
-                    .attr("height", 20);
+                    var legend = d3.select("#legend svg")
+                        .append("g")
+                        .attr("class", "aianEth")
+                        .attr("transform","translate(340,0)");
 
-                legend.append("line")
-                    .attr("x2", 30);
+                    legend.append("rect")
+                        .attr("width", 30)
+                        .attr("height", 20);
 
-                legend.append("text")
-                    .text("AAPI & American Indian")
-                    .attr("x",35)
-                    .attr("y",13);
-            }
-            
+                    legend.append("line")
+                        .attr("x2", 30);
+
+                    legend.append("text")
+                        .text("AIAN")
+                        .attr("x",35)
+                        .attr("y",13);
+                }
+                        
 
             
 
