@@ -397,10 +397,10 @@
 // Drawing a legend manually (Ordering by population sizes):
             function drawlegend(){
 
-        // Initialize + White Ethnicity
+        // Initialize, add White Race/Ethnicity legend
                 var legend = d3.select("#legend")
                     .append("svg")
-                    .attr("width", 600)
+                    .attr("width", 800)
                     .attr("height", 50)
                     .append("g")
                     .attr("class", "whiteEth")
@@ -418,7 +418,7 @@
                     .attr("x",35)
                     .attr("y",13);
 
-        // Hispanic Ethnicity
+        // Hispanic Race/Ethnicity legend
                 var legend = d3.select("#legend svg")
                     .append("g")
                     .attr("class", "hispEth")
@@ -436,7 +436,7 @@
                     .attr("x",35)
                     .attr("y",13);
 
-        // Black Ethnicity
+        // Black Race/Ethnicity legend
             var legend = d3.select("#legend svg")
                     .append("g")
                     .attr("class", "blackEth")
@@ -454,7 +454,7 @@
                     .attr("x",35)
                     .attr("y",13);
 
-        // AAPI Ethnicity
+        // AAPI Race/Ethnicity legend
                 var legend = d3.select("#legend svg")
                     .append("g")
                     .attr("class", "aapiEth")
@@ -468,15 +468,15 @@
                     .attr("x2", 30);
 
                 legend.append("text")
-                    .text("AAPI")
+                    .text("Asian American and Pacific Islander")
                     .attr("x",35)
                     .attr("y",13);
 
-        // AIAN Ethnicity
+        // AIAN Race/Ethnicity legend
                 var legend = d3.select("#legend svg")
                     .append("g")
                     .attr("class", "aianEth")
-                    .attr("transform","translate(340,0)");
+                    .attr("transform","translate(500,0)");
 
                 legend.append("rect")
                     .attr("width", 30)
@@ -486,7 +486,7 @@
                     .attr("x2", 30);
 
                 legend.append("text")
-                    .text("AIAN")
+                    .text("American Indian and Alaska Native")
                     .attr("x",35)
                     .attr("y",13);
             }
