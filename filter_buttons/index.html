@@ -1,0 +1,495 @@
+<!--CODE ADAPTED FROM: https://bl.ocks.org/suneric1/c5432c5ecd181dc8b4fe -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="style2.css">
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:900' rel='stylesheet' type='text/css'>
+		<title>Deaths of Despair</title>
+
+	</head>
+
+    <!-- HTML STRUCTURES ELEMENTS -->
+	<body>
+
+		<h2>Deaths of Despair by Race and Age in the U.S.</h2>
+        <div class="main" style=" width: 1700px; height: 700px; margin-bottom: 10px">
+
+					<!---ADD CHART DESCRIPTION-->
+
+					<p style="text-align: center;"> In 2015, Anne Case and Angus Deaton showed that increases in <span style="font-weight: 700">drug overdoses, suicides,
+                        and alcohol-related liver mortality</span></br> among middle aged whites between 1999 and 2013 challenged decades of decrease in US mortality. </br>We revisit the data to see whether increases in these "deaths of despair"
+                        are still particular to white non-Hispanic Americans.
+                    </br></br>
+                    <span style="font-weight: 700">The figures below show the number of deaths due to drug overdoses, suicides, and alcohol-related liver diseases per 100,000 people between 2009 and 2019.</span>
+					</p>
+
+					<!--ADD BUTTON-->
+
+
+                    
+						<div id="button-wrap">
+							 <div id= "last" class="button">MORTALITY RATES</div>
+							 <div id= "age" class ="button active">AGE-RACE GROUP</div>
+						</div>
+
+                        <button id="data_1">All</button>
+                        <button id="data_2">Alcohol</button>
+                        <button id="data_3">Suicides</button>
+                        <button id="data_4">Drugs</button>
+
+
+          <!-- Legend and Line Plot -->
+
+            <div class="row col-sm-10 col-sm-offset-1" id="legend"></div>
+            <div class="row col-sm-10 col-sm-offset-1" id="lineChart"></div>
+
+            <div class="row col-sm-10 col-sm-offset-1" style="margin-bottom: 50px; margin-top: 0px; margin-left: 150px; margin-right: 150px;">
+
+                <!-- Text to cite data sources -->
+            <footer class="source" style="margin: 40; text-align: justify;"><span style="font-family: 'Roboto', sans-serif; font-size:16px; font-weight: 700">Source</span></br>
+								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Data:</span>
+										<a href="https://www.cdc.gov/nchs/nvss/deaths.htm">NVSS Mortality Data: 2009-2019</a></br>
+								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Methodology:</span>
+										<a href="https://doi.org/10.1073/pnas.1518393112">Case, Anne, and Angus Deaton. “Rising Morbidity and Mortality in Midlife among White Non-Hispanic Americans in the 21st Century.”
+                                        </br>Proceedings of the National Academy of Sciences 112, no. 49 (December 8, 2015): 15078–83.</a></br>
+								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Code adapted from:</span>
+										<a href="https://bl.ocks.org/suneric1/c5432c5ecd181dc8b4fe">Zhiming Sun’s Block c5432c5ecd181dc8b4fe</a></br>
+
+                                <span style="font-family: 'Roboto', sans-serif; font-size:10px; font-weight: normal"><br>If you are affected by the issues raised in this <br>visualization please contact </span>
+								        <a style="font-size:10px" href="http://www.samaritansusa.org/contact.php">the Samaritans.</a></br>
+            </footer>
+            </div>
+
+		  </div>
+
+
+	</body>
+
+<!-- LOAD JAVASCRIPT LIBRARIES -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stupidtable/0.0.1/stupidtable.min.js"></script>
+
+		<!-- load the function file you need before you call it... -->
+		<!-- script type="text/javascript" src="js/tabulate.js"></script -->
+
+
+<!-- JAVASCRIPT SECTION -->
+
+		<script type="text/javascript">
+
+    
+            // Create variables for each csv
+             var data_1 = "DOD_RaceAndAge_rates.csv"
+             var data_2 = "alcohol.csv"
+             var data_3 = "suicides.csv"
+             var data_4 = "drugs.csv"
+
+            // Link each button to each Csv.
+            d3.select("#data_1").on("click", function(d,i)
+            {
+            update(data_1);
+            })
+            d3.select("#data_2").on("click", function(d,i)
+            {
+            update(data_2);
+            })
+            d3.select("#data_3").on("click", function(d,i)
+            {
+            update(data_3);
+            })
+            d3.select("#data_4").on("click", function(d,i)
+            {
+            update(data_4);
+            })
+
+            // Setting the height and width parameters
+            var fullHeight = 170;
+            var fullWidth = 160;
+
+						var margin = {
+				      top: 30,
+				      right: 12,
+				      bottom: 40,
+				      left: 25
+				    };
+
+            var height = fullHeight - margin.top - margin.bottom;
+            var width = fullWidth - margin.left - margin.right;
+
+            xScale = d3.time.scale().range([0,width]);
+            yScale = d3.scale.linear().range([height,0]);
+
+    // Functions to format the time data into year
+
+            var parseDate = d3.time.format("%Y").parse;
+            var outputDate = d3.time.format("%Y");
+
+
+    // Creating the D3 element nodes
+
+            var bisect = d3.bisector(function(d) {
+                return parseDate(d.year);
+            }).left;
+
+            var yAxis = d3.svg.axis()
+                .scale(yScale)
+                .orient("left")
+                .tickFormat(d3.format("s"))
+                .ticks(4)
+                .tickPadding([3])
+								.tickSubdivide(1)
+                .tickSize(-width);
+
+            var area = d3.svg.area()
+                .x(function(d){
+                    return xScale(parseDate(d.year));
+                })
+                .y0(height)
+                .y1(function(d){
+                    return yScale(+d.amount);
+                });
+
+            var line = d3.svg.line()
+                .x(function(d){
+                    return xScale(parseDate(d.year));
+                })
+                .y(function(d){
+                    return yScale(+d.amount);
+                });
+
+            drawlegend();
+
+					
+
+        
+
+    // Loading the Data and transforming it into arrays
+    var dataset = [];
+        function update(data) {
+            document.getElementById("lineChart").innerHTML = "";
+            d3.csv(data, function(error, data) {
+
+				if (error) {
+					console.log("Had an error loading file.");
+				}
+
+                // This controls how many years are shown (in part)
+                var years = d3.keys(data[0]).slice(0,11);
+
+                 dataset = [];
+
+                data.forEach(function(d,i){
+                    var deathsOfDespair = [];
+                    years.forEach(function(y){
+                        if(d[y]){
+                            deathsOfDespair.push({
+                                group: d.group,
+                                year: y,
+                                amount: +d[y]
+                            });
+                        }
+                        else{
+                            deathsOfDespair.push({
+                                group: d.group,
+                                year: y,
+                                amount: 0
+                            });
+                        }
+                    });
+
+                    dataset.push({
+                        group: d.group,
+                        deaths: deathsOfDespair
+                    });
+                });
+
+
+
+    // Creating the reactive scaling functions
+
+                xScale.domain(d3.extent(years, function(d){
+                    return parseDate(d);
+                }));
+
+                yScale.domain([0, d3.max(dataset, function(d){
+                    return d3.max(d.deaths, function(d){
+                        return +d.amount;
+                    });
+                })*1.1]);
+
+
+
+    //  Joining the data to the line chart element
+
+                var svg = d3.select("#lineChart").selectAll("svg")
+                    .data(dataset)
+                    .enter()
+                    .append("svg")
+                    .attr("class","lineChart")
+                    .attr("width",fullWidth)
+                    .attr("height",fullHeight)
+                    .append("g")
+                    .attr("transform","translate(" + margin.left + "," + margin.top + ")")
+                    .each(multiple);
+
+
+    // Function that assigns a grouping variable to the data
+
+                function multiple(group){
+
+                    d3.select(this.parentNode)
+                        .attr("class",function(d){
+                        if(d.group.startsWith("W"))
+                            return "whiteEth";
+                        else if (d.group.startsWith("B"))
+                            return "blackEth";
+                        else if (d.group.startsWith("H"))
+                            return "hispEth";
+                        else
+                            return "aapiaiEth";
+                        });
+
+                    var svg = d3.select(this)
+                        .append("g")
+                        .attr("class",function(d){
+                        if(d.group.startsWith("W"))
+                            return "whiteEth line";
+                        else if (d.group.startsWith("B"))
+                            return "blackEth line";
+                        else if (d.group.startsWith("H"))
+                            return "hispEth line";
+                        else
+                            return "aapiaiEth line";
+                        });
+
+
+    //  Joining the data to the line chart element
+
+                    svg.append("text")
+                          .attr("class", "label")
+                          .attr("x", width/2)
+                          .attr("y", -10)
+                          .style("text-anchor", "middle")
+                          .text(function(d) { return d.group; });
+
+                    svg.datum(function(d){return d.deaths;})
+                        .append("path")
+                        .attr("class","area")
+                        .attr("d",area);
+
+                    svg.append("path")
+                        .attr("class","line")
+                        .attr("d",line);
+
+                    d3.select(this).append("g")
+                        .call(yAxis)
+                        .attr("class","y axis lineChart")
+                        .selectAll("text")
+                        .style("text-anchor","end");
+
+                    svg.append("text")
+                        .attr("x", width/2)
+                        .attr("y", function(d){
+                            return yScale(+d[d.length - 1].amount);
+                        })
+                        .attr("class", "label")
+                        .style("text-anchor","start")
+                        .attr("dx",8)
+                        .attr("dy",4);
+
+
+        // Sets the start and year dates for the x-axis
+                    svg.append("text")
+                      .attr("x", 0)
+                      .attr("y", height + margin.bottom/2)
+                        .attr("class", "static_year")
+                      .style("text-anchor", "start")
+                      .text(function(d) { return outputDate(parseDate(d[0].year)); });
+
+                    svg.append("text")
+                      .attr("x", width)
+                      .attr("y", height + margin.bottom/2)
+                        .attr("class", "static_year")
+                      .style("text-anchor", "end")
+                      .text(function(d) { return outputDate(parseDate(d[d.length - 1].year));});
+
+
+        // Creates the dot for the mouseover
+                    circle = svg.append("circle")
+                        .attr("r", 4)
+                        .attr("opacity", 0)
+                        .style("pointer-events", "none");
+
+
+        // Creates the "amount" and Year captions for the mouseover ?
+                    caption = svg.append("text")
+                        .attr("class", "caption")
+                        .attr("text-anchor", "middle")
+                        .style("pointer-events", "none")
+                        .attr("dy", -6);
+
+                    curYear = svg.append("text")
+                        .attr("class", "year")
+                        .attr("text-anchor", "middle")
+                        .style("pointer-events", "none")
+                        .attr("dy", margin.bottom/2)
+                        .attr("y", height);
+
+
+        // Append the mouse-over events
+                    svg.append("rect")
+                        .attr("class", "bg")
+                        .attr("width",width)
+                        .attr("height",height)
+                        .on("mouseover",mouseOverFunc)
+                        .on("mousemove",mouseMoveFunc)
+                        .on("mouseout",mouseOutFunc);
+                }
+
+            });
+
+        
+
+
+
+// Creating the Interactivity: Mouse over events:
+
+            function mouseOverFunc(d){
+                d3.selectAll("circle").attr("opacity", 1.0);
+                d3.selectAll(".static_year").classed("hidden", true);
+                return mouseMoveFunc.call(this);
+            }
+
+            function mouseMoveFunc() {
+              var date, index, year;
+              year = xScale.invert(d3.mouse(this)[0] + 10).getFullYear();
+              date = parseDate('' + year);
+              index = 0;
+              d3.selectAll("circle")
+                .attr("cx", xScale(date))
+                .attr("cy", function(c) {
+                index = bisect(c, date, 0, c.length - 1);
+                return yScale(c[index].amount);
+              });
+              d3.selectAll("text.caption")
+                  .attr("x", xScale(date))
+                  .attr("y", function(c) {
+                    return yScale(c[index].amount);
+                    })
+                  .text(function(c) {
+                        return Math.round(c[index].amount);
+                    });
+              d3.selectAll("text.year")
+                  .attr("x", xScale(date))
+                  .text(year);
+            };
+
+            function mouseOutFunc(d){
+                d3.selectAll(".static_year").classed("hidden", false);
+                d3.selectAll("circle").attr("opacity", 0);
+                d3.selectAll("text.caption").text("");
+                d3.selectAll("text.year").text("");
+            }
+    
+        }
+
+// Drawing a legend manually (Ordering by population sizes):
+            function drawlegend(){
+
+        // Initialize + White Ethnicity
+                var legend = d3.select("#legend")
+                    .append("svg")
+                    .attr("width", 350)
+                    .attr("height", 50)
+                    .append("g")
+                    .attr("class", "whiteEth")
+                    .attr("transform","translate(30,0)");
+
+                legend.append("rect")
+                    .attr("width", 30)
+                    .attr("height", 20);
+
+                legend.append("line")
+                    .attr("x2", 30);
+
+                legend.append("text")
+                    .text("White")
+                    .attr("x",35)
+                    .attr("y",13);
+
+        // Hispanic Ethnicity
+                var legend = d3.select("#legend svg")
+                    .append("g")
+                    .attr("class", "hispEth")
+                    .attr("transform","translate(100,0)");
+
+                legend.append("rect")
+                    .attr("width", 30)
+                    .attr("height", 20);
+
+                legend.append("line")
+                    .attr("x2", 30);
+
+                legend.append("text")
+                    .text("Hispanic")
+                    .attr("x",35)
+                    .attr("y",13);
+
+        // Black Ethnicity
+            var legend = d3.select("#legend svg")
+                    .append("g")
+                    .attr("class", "blackEth")
+                    .attr("transform","translate(190,0)");
+
+                legend.append("rect")
+                    .attr("width", 30)
+                    .attr("height", 20);
+
+                legend.append("line")
+                    .attr("x2", 30);
+
+                legend.append("text")
+                    .text("Black")
+                    .attr("x",35)
+                    .attr("y",13);
+
+        // AAPI & AI Ethnicity
+                var legend = d3.select("#legend svg")
+                    .append("g")
+                    .attr("class", "aapiaiEth")
+                    .attr("transform","translate(270,0)");
+
+                legend.append("rect")
+                    .attr("width", 30)
+                    .attr("height", 20);
+
+                legend.append("line")
+                    .attr("x2", 30);
+
+                legend.append("text")
+                    .text("AAPI & AI")
+                    .attr("x",35)
+                    .attr("y",13);
+            }
+            
+
+            
+
+                (function() {
+                    update(data_1)
+})();
+            
+           
+
+            
+
+					
+
+		</script>
+
+</html>
