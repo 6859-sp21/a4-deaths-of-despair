@@ -166,7 +166,7 @@
 
     // Loading the Data and transforming it into arrays
 
-            d3.csv("DOD_RaceAndAge_rates.csv", function(error, data) {
+            d3.csv("DOD_RaceAndAge.csv", function(error, data) {
 
 				if (error) {
 					console.log("Had an error loading file.");
@@ -244,8 +244,10 @@
                             return "blackEth";
                         else if (d.group.startsWith("H"))
                             return "hispEth";
+                        else if (d.group.startsWith("AA"))
+                            return "aapiEth";
                         else
-                            return "aapiaiEth";
+                            return "aianEth";
                         });
 
                     var svg = d3.select(this)
@@ -257,8 +259,10 @@
                             return "blackEth line";
                         else if (d.group.startsWith("H"))
                             return "hispEth line";
+                        else if (d.group.startsWith("AA"))
+                            return "aapiEth line";
                         else
-                            return "aapiaiEth line";
+                            return "aianEth line";
                         });
 
 
@@ -395,7 +399,7 @@
         // Initialize + White Ethnicity
                 var legend = d3.select("#legend")
                     .append("svg")
-                    .attr("width", 500)
+                    .attr("width", 600)
                     .attr("height", 50)
                     .append("g")
                     .attr("class", "whiteEth")
@@ -452,7 +456,7 @@
         // AAPI & AI Ethnicity
                 var legend = d3.select("#legend svg")
                     .append("g")
-                    .attr("class", "aapiaiEth")
+                    .attr("class", "aapiEth")
                     .attr("transform","translate(270,0)");
 
                 legend.append("rect")
@@ -463,7 +467,24 @@
                     .attr("x2", 30);
 
                 legend.append("text")
-                    .text("AAPI & American Indian")
+                    .text("AAPI")
+                    .attr("x",35)
+                    .attr("y",13);
+
+                var legend = d3.select("#legend svg")
+                    .append("g")
+                    .attr("class", "aianEth")
+                    .attr("transform","translate(340,0)");
+
+                legend.append("rect")
+                    .attr("width", 30)
+                    .attr("height", 20);
+
+                legend.append("line")
+                    .attr("x2", 30);
+
+                legend.append("text")
+                    .text("AIAN")
                     .attr("x",35)
                     .attr("y",13);
             }

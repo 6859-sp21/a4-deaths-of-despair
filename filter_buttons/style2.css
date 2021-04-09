@@ -21,7 +21,7 @@ footer{
   text-align: left;
 }
 #button-wrap {
-  width: 420px;
+  width: 600px;
   margin-left: auto;
   margin-right: auto;
   height: 30px;
@@ -40,13 +40,26 @@ footer{
   display: block;
   padding-top: 5px;
   margin-top: 10px;
+  color:black;
+
 }
 
 .button.active {
-  box-shadow: inset 0px 0px 7px rgba(0,0,0,0.18);
+  box-shadow: inset 0px 0px 7px #a1a1a1;
   pointer-events: none;
-  background-color: #e6e6e6;
+  background-color: #a1a1a1;
 }
+
+button:hover{
+  background: #a1a1a1;
+  cursor: pointer;
+}
+button.selected{
+  background: #a1a1a1;
+  color: #fff;
+} */
+
+
 
 
 .para{
@@ -188,26 +201,4 @@ rect.bg{
 
 .tick text{
   text-anchor: end;
-}
-button{
-  background:#87ceeb;
-  color:white;
-  border: 1px solid grey;
-  padding: 14px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 4px;
-  outline: none;
-  margin-right: 16px;
-  font-size: 12px;
-  display: block;
-  text-align: centre;
-}
-button:hover{
-  background: #ffcccc;
-  cursor: pointer;
-}
-button.selected{
-  background: #E3314C;
-  color: #fff;
 }

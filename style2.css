@@ -15,7 +15,7 @@ p{
   text-align: center;
   color: #000;
   margin-bottom: 50px;
-  margin-left: : 50px;
+  margin-left: 50px;
 }
 footer{
   text-align: left;
@@ -98,8 +98,11 @@ path.line{
   transition: 0.1s;
 }
 
+
+
+
 /* Ethnicity Specific CSS */
-.aapiaiEth path.line, .aapiaiEth line{
+.aapiEth path.line, .aapiEth line{
   stroke: #7A4F6E;
 }
 .whiteEth path.line, .whiteEth line{
@@ -111,8 +114,11 @@ path.line{
 .hispEth path.line, .hispEth line{
   stroke: #095E7F;
 }
+.aianEth path.line, .aianEth line{
+  stroke: #759ba2;
+}
 
-g.aapiaiEth circle{
+g.aapiEth circle{
   fill: #7A4F6E;
   transition: 0.1s;
 }
@@ -128,8 +134,12 @@ g.hispEth circle{
   fill: #095E7F;
   transition: 0.1s;
 }
+g.aianEth circle{
+  fill: #759ba2;
+  transition: 0.1s;
+}
 
-.aapiaiEth .area, .aapiaiEth rect{
+.aapiEth .area, .aapiEth rect{
   fill: #7A4F6E;
   opacity: 0.2;
 }
@@ -145,11 +155,15 @@ g.hispEth circle{
   fill: #095E7F;
   opacity: 0.2;
 }
+.aianEth .area, .aianEth rect{
+  fill: #759ba2;
+  opacity: 0.2;
+}
 rect.bg{
   fill: #fff;
 }
 
-.aapiaiEth .label{
+.aapiEth .label{
   fill: #7A4F6E;
 }
 .whiteEth .label{
@@ -161,13 +175,16 @@ rect.bg{
 .hispEth .label{
   fill: #095E7F;
 }
+.aianEth .label{
+  fill: #759ba2;
+}
 .label{
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
 }
 
 
-.aapiaiEth text.caption{
+.aapiEth text.caption{
   fill: #7A4F6E;
   font-size: 12px;
 }
@@ -183,7 +200,10 @@ rect.bg{
   fill: #095E7F;
   font-size: 12px;
 }
-
+.aianEth text.caption{
+  fill: #759ba2;
+  font-size: 12px;
+}
 
 
 .tick text{

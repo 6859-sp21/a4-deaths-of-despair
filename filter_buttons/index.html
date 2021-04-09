@@ -15,7 +15,7 @@
     <!-- HTML STRUCTURES ELEMENTS -->
 	<body>
 
-		<h2>Deaths of Despair by Race and Age in the U.S.</h2>
+		<h2>Deaths of Despair by Race/Ethnicity and Age in the U.S.</h2>
         <div class="main" style=" width: 1700px; height: 700px; margin-bottom: 10px">
 
 					<!---ADD CHART DESCRIPTION-->
@@ -28,28 +28,33 @@
 					</p>
 
 					<!--ADD BUTTON-->
-
-
                     
-						<div id="button-wrap">
+						<!-- <div id="button-wrap">
 							 <div id= "last" class="button">MORTALITY RATES</div>
 							 <div id= "age" class ="button active">AGE-RACE GROUP</div>
-						</div>
+						</div> -->
 
-                        <button id="data_1">All</button>
-                        <button id="data_2">Alcohol</button>
-                        <button id="data_3">Suicides</button>
-                        <button id="data_4">Drugs</button>
+						<div class="col-sm-offset-1" id="button-wrap">
+                                <button class="button" id="data_1">Deaths of despair</button>
+                                <button class="button" id="data_2">All other types</button>
+                                <button class="button" id="data_3">Totals</button>
+                                <!-- <button class="button" id="data_4">Drugs</button> -->
+                        </div>
 
 
           <!-- Legend and Line Plot -->
-
-            <div class="row col-sm-10 col-sm-offset-1" id="legend"></div>
             <div class="row col-sm-10 col-sm-offset-1" id="lineChart"></div>
+            <div class="row col-sm-10 col-sm-offset-1" id="legend"></div>
 
             <div class="row col-sm-10 col-sm-offset-1" style="margin-bottom: 50px; margin-top: 0px; margin-left: 150px; margin-right: 150px;">
+            
+            <p style="font-weight: 700; text-align: justify;">If you or someone you know are in distress, please call the 
+                <a href="https://suicidepreventionlifeline.org/">National Suicide Prevention Lifeline (Lifeline)</a> at 1-800-273-TALK (8255), or text the Crisis Text Line (text HELLO to 741741).</p> </br>
 
-                <!-- Text to cite data sources -->
+
+        <!-- Text to cite data sources -->
+            <!-- <p style="font-family: 'Roboto', sans-serif; font-size:16px; font-weight: 700; text-align: justify;">Source</p> </br> -->
+
             <footer class="source" style="margin: 40; text-align: justify;"><span style="font-family: 'Roboto', sans-serif; font-size:16px; font-weight: 700">Source</span></br>
 								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Data:</span>
 										<a href="https://www.cdc.gov/nchs/nvss/deaths.htm">NVSS Mortality Data: 2009-2019</a></br>
@@ -59,8 +64,6 @@
 								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Code adapted from:</span>
 										<a href="https://bl.ocks.org/suneric1/c5432c5ecd181dc8b4fe">Zhiming Sun’s Block c5432c5ecd181dc8b4fe</a></br>
 
-                                <span style="font-family: 'Roboto', sans-serif; font-size:10px; font-weight: normal"><br>If you are affected by the issues raised in this <br>visualization please contact </span>
-								        <a style="font-size:10px" href="http://www.samaritansusa.org/contact.php">the Samaritans.</a></br>
             </footer>
             </div>
 
@@ -84,28 +87,28 @@
 
     
             // Create variables for each csv
-             var data_1 = "DOD_RaceAndAge_rates.csv"
-             var data_2 = "alcohol.csv"
-             var data_3 = "suicides.csv"
-             var data_4 = "drugs.csv"
+             var DOD = "DOD_RaceAndAge_rates.csv"
+             var nonDOD = "AllOther_RaceAndAge.csv"
+             var Total = "Total_RaceAndAge.csv"
+            //  var data_4 = "drugs.csv"
 
             // Link each button to each Csv.
             d3.select("#data_1").on("click", function(d,i)
             {
-            update(data_1);
+            update(DOD);
             })
             d3.select("#data_2").on("click", function(d,i)
             {
-            update(data_2);
+            update(nonDOD);
             })
             d3.select("#data_3").on("click", function(d,i)
             {
-            update(data_3);
+            update(Total);
             })
-            d3.select("#data_4").on("click", function(d,i)
-            {
-            update(data_4);
-            })
+            // d3.select("#data_4").on("click", function(d,i)
+            // {
+            // update(data_4);
+            // })
 
             // Setting the height and width parameters
             var fullHeight = 170;
@@ -236,8 +239,7 @@
                     .append("g")
                     .attr("transform","translate(" + margin.left + "," + margin.top + ")")
                     .each(multiple);
-
-
+                
     // Function that assigns a grouping variable to the data
 
                 function multiple(group){
@@ -404,7 +406,7 @@
         // Initialize + White Ethnicity
                 var legend = d3.select("#legend")
                     .append("svg")
-                    .attr("width", 350)
+                    .attr("width", 600)
                     .attr("height", 50)
                     .append("g")
                     .attr("class", "whiteEth")
@@ -472,7 +474,7 @@
                     .attr("x2", 30);
 
                 legend.append("text")
-                    .text("AAPI & AI")
+                    .text("AAPI & American Indian")
                     .attr("x",35)
                     .attr("y",13);
             }
@@ -481,7 +483,8 @@
             
 
                 (function() {
-                    update(data_1)
+                    update(DOD)
+                    
 })();
             
            
