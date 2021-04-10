@@ -16,7 +16,7 @@
 	<body>
 
 		<h2>Deaths of Despair by Race/Ethnicity and Age in the U.S.</h2>
-        <div class="main" style=" width: 1700px; height: 700px; margin-bottom: 10px">
+        <div class="main" style=" width: 1400px; height: 700px; margin-bottom: 10px">
 
 					<!---ADD CHART DESCRIPTION-->
 
@@ -44,6 +44,13 @@
 
           <!-- Legend and Line Plot -->
             <div class="row col-sm-10 col-sm-offset-1" id="lineChart"></div>
+            
+            <br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #739048"> + 2X %  </p>
+            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #095E7F"> + 2X %  </p>
+            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #A56527"> + 2X %  </p>
+            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #7A4F6E"> + 2X %  </p>
+            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #759ba2"> + 2X %  </p>
+
             <div class="row col-sm-10 col-sm-offset-1" id="legend"></div>
 
             <div class="row col-sm-10 col-sm-offset-1" style="margin-bottom: 50px; margin-top: 0px; margin-left: 150px; margin-right: 150px;">
@@ -112,9 +119,9 @@
 
             // Setting the height and width parameters
             var fullHeight = 170;
-            var fullWidth = 160;
+            var fullWidth = 150;
 
-						var margin = {
+			var margin = {
 				      top: 30,
 				      right: 12,
 				      bottom: 40,
@@ -211,6 +218,7 @@
                     });
                 });
 
+            dataset = dataset.filter(({group}) => !group.includes('25'))
 
 
     // Creating the reactive scaling functions
