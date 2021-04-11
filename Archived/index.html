@@ -15,21 +15,23 @@
     <!-- HTML STRUCTURES ELEMENTS -->
 	<body>
 
-		<h2>Deaths of Despair by Race and Age in the U.S.</h2>
-        <div class="main" style="position: relative; height: 700px;">
+		<h2>Deaths of Despair by Race/Ethnicity and Age in the U.S.</h2>
+        <div class="main" style=" width: 1700px; height: 700px; margin-bottom: 10px">
 
 					<!---ADD CHART DESCRIPTION-->
 
-					<p style="text-align: center;"> Include a brief description of the project.
-						<strong> Original Study:  </strong>
-						<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5640267/"> Mortality and Morbidity in the 21st Century</a> .
+					<p style="text-align: center;"> In 2015, Anne Case and Angus Deaton showed that increases in <span style="font-weight: 700">drug overdoses, suicides,
+                        and alcohol-related liver mortality</span></br> among middle aged whites between 1999 and 2013 challenged decades of decrease in US mortality. </br>We revisit the data to see whether increases in these "deaths of despair"
+                        are still particular to white non-Hispanic Americans.
+                    </br></br>
+                    <span style="font-weight: 700">The figures below show the number of deaths due to drug overdoses, suicides, and alcohol-related liver diseases per 100,000 people between 2009 and 2019.</span>
 					</p>
 
 					<!--ADD BUTTON-->
 
 						<div id="button-wrap">
-							 <div id= "count" class="button">DEATHS</div>
-							 <div id= "group" class ="button active">AGE GROUP</div>
+							 <div id= "last" class="button">MORTALITY RATES</div>
+							 <div id= "age" class ="button active">AGE-RACE GROUP</div>
 						</div>
 
           <!-- Legend and Line Plot -->
@@ -37,17 +39,28 @@
             <div class="row col-sm-10 col-sm-offset-1" id="legend"></div>
             <div class="row col-sm-10 col-sm-offset-1" id="lineChart"></div>
 
-            <div class="row col-sm-10 col-sm-offset-1">
+            <div class="row col-sm-10 col-sm-offset-1" style="margin-bottom: 50px; margin-top: 0px; margin-left: 150px; margin-right: 150px;">
+
+            
+                <p style="font-family: 'Roboto', sans-serif; font-size:10px; font-weight: normal"><br><br>If you or someone you know are in distress, please call the 
+                    <a style="font-size:10px" href="https://suicidepreventionlifeline.org/">National Suicide Prevention Lifeline (Lifeline)</a> at 1-800-273-TALK (8255), or text the Crisis Text Line (text HELLO to 741741).</p> </br>
+
+
 
                 <!-- Text to cite data sources -->
-            <footer class="source"><span style="font-family: 'Times', sans-serif; font-size:16px; font-weight: 700">Source</span></br>
-								<span style="font-family: 'Times', sans-serif; font-size:14px; ">Data:</span>
+            <footer class="source" style="margin: 40; text-align: justify;"><span style="font-family: 'Roboto', sans-serif; font-size:16px; font-weight: 700">Source</span></br>
+
+								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Data:</span>
 										<a href="https://www.cdc.gov/nchs/nvss/deaths.htm">NVSS Mortality Data: 2009-2019</a></br>
-								<span style="font-family: 'Times', sans-serif; font-size:14px; ">Methodology:</span>
+								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Methodology:</span>
 										<a href="https://doi.org/10.1073/pnas.1518393112">Case, Anne, and Angus Deaton. “Rising Morbidity and Mortality in Midlife among White Non-Hispanic Americans in the 21st Century.”
-																  Proceedings of the National Academy of Sciences 112, no. 49 (December 8, 2015): 15078–83.</a></br>
-								<span style="font-family: 'Times', sans-serif; font-size:14px; ">Code adapted from:</span>
+                                        </br>Proceedings of the National Academy of Sciences 112, no. 49 (December 8, 2015): 15078–83.</a></br>
+								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Code adapted from:</span>
 										<a href="https://bl.ocks.org/suneric1/c5432c5ecd181dc8b4fe">Zhiming Sun’s Block c5432c5ecd181dc8b4fe</a></br>
+                                <span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Hotline text adapted from:</span>
+										<a href="https://www.nimh.nih.gov/health/topics/suicide-prevention/index.shtml">the National Institute of Mental Health</a></br>
+
+                                
             </footer>
             </div>
 
@@ -60,7 +73,7 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stupidtable/0.0.1/stupidtable.min.js"></script>
-				<script src="libs/isotope.pkgd.min.js"></script>
+
 		<!-- load the function file you need before you call it... -->
 		<!-- script type="text/javascript" src="js/tabulate.js"></script -->
 
@@ -72,11 +85,11 @@
     // Setting the height and width parameters
 
             var fullHeight = 170;
-            var fullWidth = 190;
+            var fullWidth = 160;
 
 						var margin = {
 				      top: 30,
-				      right: 10,
+				      right: 12,
 				      bottom: 40,
 				      left: 25
 				    };
@@ -91,6 +104,7 @@
 
             var parseDate = d3.time.format("%Y").parse;
             var outputDate = d3.time.format("%Y");
+
 
 
     // Creating the D3 element nodes
@@ -127,21 +141,15 @@
 
             drawlegend();
 
-
-			// JQUERY LIB TO DO SMALL MULTIPLES SORTING
-
 						function setupIsotope() {
 							$("#vis").isotope({
 								itemSelector: '.chart',
 								layoutMode: 'fitRows',
 								getSortData: {
 									count: function(e) {
-										var d, sum;
-										d = d3.select(e).datum();
-										sum = d3.sum(d.values, function(d) {
-											return d.count;
-										});
-										return sum * -1;
+										var d;
+										d = d3.select(e).select("2019");
+										return d.amount;
 									},
 									group: function(e) {
 										var d;
@@ -155,9 +163,11 @@
 						});
 					}
 
-    // Loading the Data and trxansforming it into arrays
 
-            d3.csv("DOD_RaceAndAge.csv", function(error, data) {jow
+
+    // Loading the Data and transforming it into arrays
+
+            d3.csv("DOD_RaceAndAge.csv", function(error, data) {
 
 				if (error) {
 					console.log("Had an error loading file.");
@@ -235,8 +245,10 @@
                             return "blackEth";
                         else if (d.group.startsWith("H"))
                             return "hispEth";
+                        else if (d.group.startsWith("AA"))
+                            return "aapiEth";
                         else
-                            return "otherEth";
+                            return "aianEth";
                         });
 
                     var svg = d3.select(this)
@@ -248,8 +260,10 @@
                             return "blackEth line";
                         else if (d.group.startsWith("H"))
                             return "hispEth line";
+                        else if (d.group.startsWith("AA"))
+                            return "aapiEth line";
                         else
-                            return "otherEth line";
+                            return "aianEth line";
                         });
 
 
@@ -350,7 +364,7 @@
 
             function mouseMoveFunc() {
               var date, index, year;
-              year = xScale.invert(d3.mouse(this)[0] + 30).getFullYear();
+              year = xScale.invert(d3.mouse(this)[0] + 10).getFullYear();
               date = parseDate('' + year);
               index = 0;
               d3.selectAll("circle")
@@ -365,7 +379,7 @@
                     return yScale(c[index].amount);
                     })
                   .text(function(c) {
-                        return c[index].amount;
+                        return Math.round(c[index].amount);
                     });
               d3.selectAll("text.year")
                   .attr("x", xScale(date))
@@ -377,16 +391,16 @@
                 d3.selectAll("circle").attr("opacity", 0);
                 d3.selectAll("text.caption").text("");
                 d3.selectAll("text.year").text("");
-            };
+            }
 
 
 // Drawing a legend manually (Ordering by population sizes):
             function drawlegend(){
 
-        // Initialize + White Ethnicity
+        // Initialize, add White Race/Ethnicity legend
                 var legend = d3.select("#legend")
                     .append("svg")
-                    .attr("width", 350)
+                    .attr("width", 800)
                     .attr("height", 50)
                     .append("g")
                     .attr("class", "whiteEth")
@@ -404,7 +418,7 @@
                     .attr("x",35)
                     .attr("y",13);
 
-        // Hispanic Ethnicity
+        // Hispanic Race/Ethnicity legend
                 var legend = d3.select("#legend svg")
                     .append("g")
                     .attr("class", "hispEth")
@@ -422,7 +436,7 @@
                     .attr("x",35)
                     .attr("y",13);
 
-        // Black Ethnicity
+        // Black Race/Ethnicity legend
             var legend = d3.select("#legend svg")
                     .append("g")
                     .attr("class", "blackEth")
@@ -440,10 +454,10 @@
                     .attr("x",35)
                     .attr("y",13);
 
-        // Other Ethnicity
+        // AAPI Race/Ethnicity legend
                 var legend = d3.select("#legend svg")
                     .append("g")
-                    .attr("class", "otherEth")
+                    .attr("class", "aapiEth")
                     .attr("transform","translate(270,0)");
 
                 legend.append("rect")
@@ -454,7 +468,25 @@
                     .attr("x2", 30);
 
                 legend.append("text")
-                    .text("Other")
+                    .text("Asian American and Pacific Islander")
+                    .attr("x",35)
+                    .attr("y",13);
+
+        // AIAN Race/Ethnicity legend
+                var legend = d3.select("#legend svg")
+                    .append("g")
+                    .attr("class", "aianEth")
+                    .attr("transform","translate(500,0)");
+
+                legend.append("rect")
+                    .attr("width", 30)
+                    .attr("height", 20);
+
+                legend.append("line")
+                    .attr("x2", 30);
+
+                legend.append("text")
+                    .text("American Indian and Alaska Native")
                     .attr("x",35)
                     .attr("y",13);
             }

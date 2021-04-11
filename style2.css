@@ -15,13 +15,13 @@ p{
   text-align: center;
   color: #000;
   margin-bottom: 50px;
-  margin-left: 50px;
+  margin-left:  50px;
 }
 footer{
   text-align: left;
 }
 #button-wrap {
-  width: 420px;
+  width: 600px;
   margin-left: auto;
   margin-right: auto;
   height: 30px;
@@ -39,7 +39,10 @@ footer{
   border: 1px solid #cecece;
   display: block;
   padding-top: 5px;
+  padding-bottom: 5px;
   margin-top: 10px;
+  color: black;
+
 }
 
 .button.active {
@@ -47,6 +50,20 @@ footer{
   pointer-events: none;
   background-color: #e6e6e6;
 }
+
+button:hover{
+  box-shadow: inset 0px 0px 7px rgba(0,0,0,0.18);
+  background-color: #e6e6e6;
+  cursor: pointer;
+}
+button.selected{
+  box-shadow: inset 0px 0px 7px rgba(0,0,0,0.18);
+  background-color: #e6e6e6;
+  background: #e6e6e6;
+  color: #fff;
+} */
+
+
 
 
 .para{
@@ -97,9 +114,6 @@ path.line{
   stroke-width: 1.5px;
   transition: 0.1s;
 }
-
-
-
 
 /* Ethnicity Specific CSS */
 .aapiEth path.line, .aapiEth line{
@@ -209,24 +223,4 @@ rect.bg{
 
 .tick text{
   text-anchor: end;
-}
-button{
-  background: #fff;
-  color: #E3314C;
-  border: 1px solid #E3314C;
-  padding: 14px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 4px;
-  outline: none;
-  margin-right: 16px;
-  font-size: 12px;
-}
-button:hover{
-  background: #ffcccc;
-  cursor: pointer;
-}
-button.selected{
-  background: #E3314C;
-  color: #fff;
 }
