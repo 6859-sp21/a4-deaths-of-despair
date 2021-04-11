@@ -35,10 +35,13 @@
 						</div> -->
 
 						<div id="button-wrap">
-                                <button class="button" id="data_1">Deaths of despair</button>
-                                <button class="button" id="data_2">All other types</button>
-                                <button class="button" id="data_3">Totals</button>
-                                <!-- <button class="button" id="data_4">Drugs</button> -->
+                                <button class="button" id="DOD">All deaths of despair</button>
+                               
+                                <button class="button" id="suicide">Suicides only</button>
+                                <button class="button" id="poisoning">Poisonings only</button>
+                                <button class="button" id="liver">Liver diseases only</button>
+
+                                <button class="button" id="Total">Total mortality</button>
                         </div>
 
 
@@ -46,12 +49,12 @@
 
             <div class="row col-sm-10 col-sm-offset-1" id="lineChart"></div>
 
-            <p style="text-align: left; font-size:14px; font-family: 'Roboto', sans-serif;"> Overall Change </p>
+            <!-- <p style="text-align: left; font-size:14px; font-family: 'Roboto', sans-serif;"> Overall Change </p>
             <p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #739048; opacity: 0.5;"> + X %  </p>
             <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #095E7F; opacity: 0.5;"> + X %  </p>
             <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #A56527; opacity: 0.5;"> + X %  </p>
             <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #7A4F6E; opacity: 0.5;"> + X %  </p>
-            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #759ba2; opacity: 0.5;"> + X %  </p>
+            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #759ba2; opacity: 0.5;"> + X %  </p> -->
 
             <div class="row col-sm-10 col-sm-offset-1" id="legend"></div>
 
@@ -97,27 +100,33 @@
 
             // Create variables for each csv
              var DOD = "DOD_RaceAndAge.csv"
-             var nonDOD = "AllOther_RaceAndAge.csv"
+             var suicide = "Suicide_RaceAndAge.csv"
+             var poisoning = "Poisoning_RaceAndAge.csv"
+             var liver = "Liver_RaceAndAge.csv"
              var Total = "Total_RaceAndAge.csv"
-            //  var data_4 = "drugs.csv"
 
             // Link each button to each Csv.
-            d3.select("#data_1").on("click", function(d,i)
+            d3.select("#DOD").on("click", function(d,i)
             {
             update(DOD);
             })
-            d3.select("#data_2").on("click", function(d,i)
+            d3.select("#suicide").on("click", function(d,i)
             {
-            update(nonDOD);
+            update(suicide);
             })
-            d3.select("#data_3").on("click", function(d,i)
+            d3.select("#poisoning").on("click", function(d,i)
+            {
+            update(poisoning);
+            })
+            d3.select("#liver").on("click", function(d,i)
+            {
+            update(liver);
+            })
+            d3.select("#Total").on("click", function(d,i)
             {
             update(Total);
             })
-            // d3.select("#data_4").on("click", function(d,i)
-            // {
-            // update(data_4);
-            // })
+
 
             // Setting the height and width parameters
             var fullHeight = 170;

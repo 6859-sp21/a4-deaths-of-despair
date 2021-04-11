@@ -21,7 +21,7 @@ footer{
   text-align: left;
 }
 #button-wrap {
-  width: 600px;
+  width: 800px;
   margin-left: auto;
   margin-right: auto;
   height: 30px;
@@ -32,7 +32,7 @@ footer{
 .button {
   cursor: pointer;
   float: left;
-  width: 180px;
+  width: 166px;
   height: 30px;
   text-align: center;
   background: #fcfcfc;
