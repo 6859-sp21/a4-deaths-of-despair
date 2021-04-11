@@ -39,23 +39,27 @@ footer{
   border: 1px solid #cecece;
   display: block;
   padding-top: 5px;
+  padding-bottom: 5px;
   margin-top: 10px;
-  color:black;
+  color: black;
 
 }
 
 .button.active {
-  box-shadow: inset 0px 0px 7px #a1a1a1;
+  box-shadow: inset 0px 0px 7px rgba(0,0,0,0.18);
   pointer-events: none;
-  background-color: #a1a1a1;
+  background-color: #e6e6e6;
 }
 
 button:hover{
-  background: #a1a1a1;
+  box-shadow: inset 0px 0px 7px rgba(0,0,0,0.18);
+  background-color: #e6e6e6;
   cursor: pointer;
 }
 button.selected{
-  background: #a1a1a1;
+  box-shadow: inset 0px 0px 7px rgba(0,0,0,0.18);
+  background-color: #e6e6e6;
+  background: #e6e6e6;
   color: #fff;
 } */
 
