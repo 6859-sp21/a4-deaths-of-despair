@@ -221,33 +221,43 @@ rect.bg{
 
 .aapiAll{
   color: #7A4F6E;
-  font-size: 25px;
+  font-size: 30px;
   font-family: 'Roboto', sans-serif;
-  opacity: 0.5;
+  opacity: 0.6;
+  line-height: 115px;
+  /* margin: 75px 0; */
 }
 .whiteAll{
   color: #739048;
-  font-size: 25px;
+  font-size: 30px;
   font-family: 'Roboto', sans-serif;
-  opacity: 0.5;
+  opacity: 0.6;
+  line-height: 115px;
+  /* margin: 75px 0; */
 }
 .blackAll{
   color: #A56527;
-  font-size: 25px;
+  font-size: 30px;
   font-family: 'Roboto', sans-serif;
-  opacity: 0.5;
+  opacity: 0.6;
+  line-height: 115px;
+  /* margin: 75px 0; */
 }
 .hispAll{
   color: #095E7F;
-  font-size: 25px;
+  font-size: 30px;
   font-family: 'Roboto', sans-serif;
-  opacity: 0.5;
+  opacity: 0.6;
+  line-height: 115px;
+  /* margin: 75px 0; */
 }
 .aianAll{
   color: #759ba2;
-  font-size: 25px;
+  font-size: 30px;
   font-family: 'Roboto', sans-serif;
-  opacity: 0.5;
+  opacity: 0.6;  
+  line-height: 115px;
+  /* margin: 10px 0; */
 }
 
 
