@@ -224,7 +224,8 @@ rect.bg{
   font-size: 30px;
   font-family: 'Roboto', sans-serif;
   opacity: 0.6;
-  line-height: 115px;
+  line-height: 120px;
+  text-align: left;
   /* margin: 75px 0; */
 }
 .whiteAll{
@@ -232,7 +233,8 @@ rect.bg{
   font-size: 30px;
   font-family: 'Roboto', sans-serif;
   opacity: 0.6;
-  line-height: 115px;
+  line-height: 120px;
+  text-align: left;
   /* margin: 75px 0; */
 }
 .blackAll{
@@ -240,7 +242,8 @@ rect.bg{
   font-size: 30px;
   font-family: 'Roboto', sans-serif;
   opacity: 0.6;
-  line-height: 115px;
+  line-height: 120px;
+  text-align: left;
   /* margin: 75px 0; */
 }
 .hispAll{
@@ -248,7 +251,8 @@ rect.bg{
   font-size: 30px;
   font-family: 'Roboto', sans-serif;
   opacity: 0.6;
-  line-height: 115px;
+  line-height: 120px;
+  text-align: left;
   /* margin: 75px 0; */
 }
 .aianAll{
@@ -256,7 +260,8 @@ rect.bg{
   font-size: 30px;
   font-family: 'Roboto', sans-serif;
   opacity: 0.6;  
-  line-height: 115px;
+  line-height: 120px;
+  text-align: left;
   /* margin: 10px 0; */
 }
 
