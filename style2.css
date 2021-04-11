@@ -219,6 +219,37 @@ rect.bg{
   font-size: 12px;
 }
 
+.aapiAll{
+  color: #7A4F6E;
+  font-size: 25px;
+  font-family: 'Roboto', sans-serif;
+  opacity: 0.5;
+}
+.whiteAll{
+  color: #739048;
+  font-size: 25px;
+  font-family: 'Roboto', sans-serif;
+  opacity: 0.5;
+}
+.blackAll{
+  color: #A56527;
+  font-size: 25px;
+  font-family: 'Roboto', sans-serif;
+  opacity: 0.5;
+}
+.hispAll{
+  color: #095E7F;
+  font-size: 25px;
+  font-family: 'Roboto', sans-serif;
+  opacity: 0.5;
+}
+.aianAll{
+  color: #759ba2;
+  font-size: 25px;
+  font-family: 'Roboto', sans-serif;
+  opacity: 0.5;
+}
+
 
 
 .tick text{

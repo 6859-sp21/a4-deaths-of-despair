@@ -48,13 +48,14 @@
           <!-- Legend and Line Plot -->
 
             <div class="row col-sm-10 col-sm-offset-1" id="lineChart"></div>
+            <p style="text-align: left; font-size:14px; font-family: 'Roboto', sans-serif;"> Overall Change </p>
+            <div id="increase"></div>
 
-            <!-- <p style="text-align: left; font-size:14px; font-family: 'Roboto', sans-serif;"> Overall Change </p>
-            <p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #739048; opacity: 0.5;"> + X %  </p>
-            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #095E7F; opacity: 0.5;"> + X %  </p>
-            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #A56527; opacity: 0.5;"> + X %  </p>
-            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #7A4F6E; opacity: 0.5;"> + X %  </p>
-            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif; color: #759ba2; opacity: 0.5;"> + X %  </p> -->
+            <!-- <p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif;"> + X %  </p>
+            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif;"> + X %  </p>
+            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif;"> + X %  </p>
+            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif;"> + X %  </p>
+            <br><br><br><br><p style="text-align: left; font-size:35px; font-family: 'Roboto', sans-serif;"> + X %  </p> -->
 
             <div class="row col-sm-10 col-sm-offset-1" id="legend"></div>
 
@@ -106,29 +107,24 @@
              var Total = "Total_RaceAndAge.csv"
 
             // Link each button to each Csv.
-            d3.select("#DOD").on("click", function(d,i)
-            {
-            update(DOD);
+            d3.select("#DOD").on("click", function(d,i){
+                update(DOD);
             })
-            d3.select("#suicide").on("click", function(d,i)
-            {
-            update(suicide);
+            d3.select("#suicide").on("click", function(d,i){
+                update(suicide);
             })
-            d3.select("#poisoning").on("click", function(d,i)
-            {
-            update(poisoning);
+            d3.select("#poisoning").on("click", function(d,i){
+                update(poisoning);
             })
-            d3.select("#liver").on("click", function(d,i)
-            {
-            update(liver);
+            d3.select("#liver").on("click", function(d,i){
+                update(liver);
             })
-            d3.select("#Total").on("click", function(d,i)
-            {
-            update(Total);
+            d3.select("#Total").on("click", function(d,i){
+                update(Total);
             })
 
-
-            // Setting the height and width parameters
+    
+    // Setting the height and width parameters
             var fullHeight = 170;
             var fullWidth = 170;
 
@@ -144,6 +140,8 @@
 
             xScale = d3.time.scale().range([0,width]);
             yScale = d3.scale.linear().range([height,0]);
+            yScale2 = d3.scale.linear().range([fullHeight*4,0]);
+
 
     // Functions to format the time data into year
 
@@ -187,12 +185,14 @@
 
 
 
-
-
     // Loading the Data and transforming it into arrays
-    var dataset = [];
-        function update(data) {
+ 
+    function update(data) {
+
+            // Set blank slate
             document.getElementById("lineChart").innerHTML = "";
+            document.getElementById("increase").innerHTML = "";
+
             d3.csv(data, function(error, data) {
 
 				if (error) {
@@ -202,7 +202,8 @@
                 // This controls how many years are shown (in part)
                 var years = d3.keys(data[0]).slice(0,11);
 
-                 dataset = [];
+                var dataset = [];
+                 var pct_change = [];
 
                 data.forEach(function(d,i){
                     var deathsOfDespair = [];
@@ -227,10 +228,20 @@
                         group: d.group,
                         deaths: deathsOfDespair
                     });
+                    
+                    indices = [0, 4, 8, 12, 16]; // Otherwise there are duplicates
+
+                    if(indices.includes(i)){
+                        pct_change.push({
+                                group: d.group.substr(0, d.group.indexOf(':')),
+                                change: +d.change + " %"
+                            });
+                      }
+                    
                 });
-
-            // dataset = dataset.filter(({group}) => !group.includes('25'))
-
+                
+    // dataset = dataset.filter(({group}) => !group.includes('25'))
+            
 
     // Creating the reactive scaling functions
 
@@ -244,10 +255,34 @@
                     });
                 })*1.1]);
 
+                yScale.domain([0, d3.max(dataset, function(d){
+                    return d3.max(d.deaths, function(d){
+                        return +d.amount;
+                    });
+                })*1.1]);
 
+
+
+    //  Creating the increase text
+        var delta = d3.select("#increase").selectAll("p")
+                        .data(pct_change)
+                        .enter()
+                        .append("p")
+                        .attr("class",function(d){
+                                if(d.group.startsWith("W"))
+                                    return "whiteAll";
+                                else if (d.group.startsWith("B"))
+                                    return "blackAll";
+                                else if (d.group.startsWith("H"))
+                                    return "hispAll";
+                                else if (d.group.startsWith("AA"))
+                                    return "aapiAll";
+                                else
+                                    return "aianAll";
+                                })
+                        .text(function(d){return d.change;});
 
     //  Joining the data to the line chart element
-
                 var svg = d3.select("#lineChart").selectAll("svg")
                     .data(dataset)
                     .enter()
@@ -259,6 +294,8 @@
                     .attr("transform","translate(" + margin.left + "," + margin.top + ")")
                     .each(multiple);
 
+
+                    
     // Function that assigns a grouping variable to the data
 
             function multiple(group){
@@ -290,18 +327,18 @@
                             return "aapiEth line";
                         else
                             return "aianEth line";
-            });
+                        });
 
-
+    // Percent Change values
 
     //  Joining the data to the line chart element
 
                     svg.append("text")
-                          .attr("class", "label")
-                          .attr("x", width/2)
-                          .attr("y", -10)
-                          .style("text-anchor", "middle")
-                          .text(function(d) { return d.group; });
+                        .attr("class", "label")
+                        .attr("x", width/2)
+                        .attr("y", -10)
+                        .style("text-anchor", "middle")
+                        .text(function(d) { return d.group; });
 
                     svg.datum(function(d){return d.deaths;})
                         .append("path")
@@ -310,7 +347,7 @@
 
                     svg.append("path")
                         .attr("class","line")
-                        .attr("d",line);
+                        .attr("d", line);
 
                     d3.select(this).append("g")
                         .call(yAxis)
@@ -375,9 +412,10 @@
                         .on("mouseover",mouseOverFunc)
                         .on("mousemove",mouseMoveFunc)
                         .on("mouseout",mouseOutFunc);
-                }
 
-            });
+                } // End of multiples
+
+    }); // End of Data
 
 
 
@@ -526,7 +564,7 @@ function drawlegend(){
                 (function() {
                     update(DOD)
 
-})();
+                    })();
 
 
 
