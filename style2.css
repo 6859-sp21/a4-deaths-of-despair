@@ -45,6 +45,23 @@ footer{
 
 }
 
+.button2 {
+  cursor: pointer;
+  float: left;
+  font-weight: 700;
+  width: 166px;
+  height: 30px;
+  text-align: center;
+  background: #fcfcfc;
+  border: 1px solid #cecece;
+  display: block;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 10px;
+  color: black;
+
+}
+
 .button.active {
   box-shadow: inset 0px 0px 7px rgba(0,0,0,0.18);
   pointer-events: none;
@@ -224,7 +241,7 @@ rect.bg{
   font-size: 30px;
   font-family: 'Roboto', sans-serif;
   opacity: 0.6;
-  line-height: 120px;
+  line-height: 115px;
   text-align: left;
   /* margin: 75px 0; */
 }
@@ -233,7 +250,7 @@ rect.bg{
   font-size: 30px;
   font-family: 'Roboto', sans-serif;
   opacity: 0.6;
-  line-height: 120px;
+  line-height: 115px;
   text-align: left;
   /* margin: 75px 0; */
 }
@@ -242,7 +259,7 @@ rect.bg{
   font-size: 30px;
   font-family: 'Roboto', sans-serif;
   opacity: 0.6;
-  line-height: 120px;
+  line-height: 115px;
   text-align: left;
   /* margin: 75px 0; */
 }
@@ -251,7 +268,7 @@ rect.bg{
   font-size: 30px;
   font-family: 'Roboto', sans-serif;
   opacity: 0.6;
-  line-height: 120px;
+  line-height: 115px;
   text-align: left;
   /* margin: 75px 0; */
 }
@@ -260,7 +277,7 @@ rect.bg{
   font-size: 30px;
   font-family: 'Roboto', sans-serif;
   opacity: 0.6;  
-  line-height: 120px;
+  line-height: 115px;
   text-align: left;
   /* margin: 10px 0; */
 }

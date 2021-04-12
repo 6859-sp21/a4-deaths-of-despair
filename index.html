@@ -24,7 +24,7 @@
                         and alcohol-related liver mortality</span></br> among middle aged whites between 1999 and 2013 challenged decades of decrease in US mortality. </br>We revisit the data to see whether increases in these "deaths of despair"
                         are still particular to white non-Hispanic Americans.
                     </br></br>
-                    <span style="font-weight: 700">The figures below show the number of deaths due to drug overdoses, suicides, and alcohol-related liver diseases per 100,000 people between 2009 and 2019.</span>
+                    <span style="font-weight: 700">The figures below show the number of deaths per 100,000 people between 2009 and 2019.</span>
 					</p>
 
 					<!--ADD BUTTON-->
@@ -35,13 +35,14 @@
 						</div> -->
 
 						<div id="button-wrap">
-                                <button class="button" id="DOD">All deaths of despair</button>
+                                <button class="button2" id="DOD">All deaths of despair</button>
                                
                                 <button class="button" id="suicide">Suicides only</button>
                                 <button class="button" id="poisoning">Poisonings only</button>
                                 <button class="button" id="liver">Liver diseases only</button>
 
-                                <button class="button" id="Total">Total mortality</button>
+                                <button class="button2" id="nonDOD">All other</button>
+                                <button class="button2" id="Total">Total mortality</button>
                         </div>
 
 
@@ -93,6 +94,7 @@
 
             // Create variables for each csv
              var DOD = "Data/DOD_RaceAndAge.csv"
+             var nonDOD = "Data/nonDOD_RaceAndAge.csv"
              var suicide = "Data/Suicide_RaceAndAge.csv"
              var poisoning = "Data/Poisoning_RaceAndAge.csv"
              var liver = "Data/Liver_RaceAndAge.csv"
@@ -110,6 +112,9 @@
             })
             d3.select("#liver").on("click", function(d,i){
                 update(liver);
+            })
+            d3.select("#nonDOD").on("click", function(d,i){
+                update(nonDOD);
             })
             d3.select("#Total").on("click", function(d,i){
                 update(Total);
@@ -226,12 +231,13 @@
                     if(indices.includes(i)){
                         pct_change.push({
                                 group: d.group.substr(0, d.group.indexOf(':')),
-                                change: +d.change + " %"
+                                change: d.change + "%"
                             });
                       }
                     
                 });
                 
+                console.log(pct_change)
     // dataset = dataset.filter(({group}) => !group.includes('25'))
             
 
@@ -537,7 +543,7 @@ function drawlegend(){
                         var legend = d3.select("#legend svg")
                             .append("g")
                             .attr("class", "aianEth")
-                            .attr("transform","translate(500,0)");
+                            .attr("transform","translate(490,0)");
 
                         legend.append("rect")
                             .attr("width", 30)
