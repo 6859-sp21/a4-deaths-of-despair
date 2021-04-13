@@ -13,18 +13,22 @@
 	</head>
 
     <!-- HTML STRUCTURES ELEMENTS -->
+
 	<body>
 
-		<h2>Deaths of Despair by Race/Ethnicity and Age in the U.S.</h2>
-        <div class="main" style=" width: 1000px; height: 700px; margin-bottom: 10px">
+		<h1> Deaths of Despair </h1>
+		<h2> Visualizing Deaths by Age-Race Groups</h2>
+        <div class="main" style=" width: 1000px; height: 700px; margin-bottom: 0px; ">
 
 					<!---ADD CHART DESCRIPTION-->
 
-					<p style="text-align: center;"> In 2015, Anne Case and Angus Deaton showed that increases in <span style="font-weight: 700">drug overdoses, suicides,
-                        and alcohol-related liver mortality</span></br> among middle aged whites between 1999 and 2013 challenged decades of decrease in US mortality. </br>We revisit the data to see whether increases in these "deaths of despair"
-                        are still particular to white non-Hispanic Americans.
+					<p style="text-align: center;">
+							In 2015, Anne Case and Angus Deaton showed that increases in <span style="font-weight: 700">drug overdoses, suicides,
+              and drug-or-alcohol-related liver mortality</span></br> among middle aged whites between 1999 and 2013 challenged decades of decrease in US mortality.  We revisit the data to see whether increases in these "deaths of despair"
+              are still particular to white non-Hispanic Americans. Unforunately, our more recent findings (post 2015) show that increasing rates of deaths-of-despair have become prevalent across all races, with an unsettling 99% increase among Black populations. <span style="font-weight: 700; color: #031433"></br></br> Investigate this yourself and scroll across different years per age-race group.
+								To compare how death rates vary by deaht-of-despair, click through the buttons.
                     </br></br>
-                    <span style="font-weight: 700">The figures below show the number of deaths due to drug overdoses, suicides, and alcohol-related liver diseases per 100,000 people between 2009 and 2019.</span>
+                    <span style="font-weight: bold">The figures below show the number of deaths per 100,000 people between 2009 and 2019.</span>
 					</p>
 
 					<!--ADD BUTTON-->
@@ -35,32 +39,51 @@
 						</div> -->
 
 						<div id="button-wrap">
-                                <button class="button" id="DOD">All deaths of despair</button>
-                               
-                                <button class="button" id="suicide">Suicides only</button>
-                                <button class="button" id="poisoning">Poisonings only</button>
-                                <button class="button" id="liver">Liver diseases only</button>
 
-                                <button class="button" id="Total">Total mortality</button>
-                        </div>
+								<div class="dropdown">
+                      <button class="button2 active" >Deaths of Despair </button>
+
+											<div class= "dropdown-content">
+													<button class="button active" id="DOD">ALL Deaths of Despair</button>
+													<button class="button" style="margin-top: 30px;" id="suicide"> Suicides Only</button>
+                          <button class="button" style="margin-top: 60px;" id="poisoning"> Poisonings Only</button>
+                        	<button class="button" style="margin-top: 90px;" id="liver"> Liver diseases Only</button>
+											</div>
+								</div>
+
+                      <button class="button2" id="nonDOD">All Other Deaths</button>
+                      <button class="button2" id="Total">Total Mortality</button>
+
+										<p style="text-align: center;
+															margin-top: 25px;
+															font-size: 16px;
+															margin-left: 610px;
+															font-family: 'Arial', sans-serif;
+									  					font-weight: bold;
+									  					width: 200px;"> Overall Rate </br> of Change </br> 2009-2019</p>
+								</div>
 
 
-          <!-- Legend and Line Plot -->
+          <!-- Line Plot(s) -->
 
-            <div class="row col-sm-9 col-sm-offset-1" id="lineChart"></div>
-            <p style="text-align: center; font-size:14px; font-family: 'Roboto', sans-serif;">Overall Change: '09-'19</p>
-            <div class="row col-sm-2" id="increase"></div>
+            <div class="row col-sm-9 col-sm-offset-1" style="margin-left: 90px " id="lineChart"></div>
 
-            <div class="row col-sm-10 col-sm-offset-1" id="legend"></div>
+					<!-- Right Column: Rates -->
 
-            <div class="row col-sm-10" style="margin-bottom: 50px; margin-top: 0px; margin-left: 15px; margin-right: 15px;">
-            <p style="font-weight: 700; text-align: left;">If you or someone you know are in distress, please call the
+            <div class="row col-sm-2" style="margin-top: 0px"id="increase"></div>
+
+							<!-- Below Plot: Legend -->
+
+						<div class="row col-sm-10 col-sm-offset-1" style="margin-left: 72px; margin-top: 18px" id="legend"></div>
+
+            <div class="row col-sm-10" style="margin-bottom: 50px; margin-top: 0px; margin-left: 20px; margin-right: 0px;">
+            <p style="font-weight: 700; text-align: center;">If you or someone you know are in distress, please call the
                 <a href="https://suicidepreventionlifeline.org/">National Suicide Prevention Lifeline (Lifeline)</a> at 1-800-273-TALK (8255), or text the Crisis Text Line (text HELLO to 741741).</p> </br>
 
         <!-- Text to cite data sources -->
             <!-- <p style="font-family: 'Roboto', sans-serif; font-size:16px; font-weight: 700; text-align: justify;">Source</p> </br> -->
 
-            <footer class="source" style="margin: 40; text-align: justify;"><span style="font-family: 'Roboto', sans-serif; font-size:16px; font-weight: 700">Source</span></br>
+            <footer class="source" style="margin-bottom: 40; text-align: justify;"><span style="font-family: 'Roboto', sans-serif; font-size:16px; font-weight: 700">Source</span></br>
 								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Data:</span>
 										<a href="https://www.cdc.gov/nchs/nvss/deaths.htm">NVSS Mortality Data: 2009-2019</a></br>
 								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Methodology:</span>
@@ -92,30 +115,55 @@
 
 
             // Create variables for each csv
-             var DOD = "DOD_RaceAndAge.csv"
-             var suicide = "Suicide_RaceAndAge.csv"
-             var poisoning = "Poisoning_RaceAndAge.csv"
-             var liver = "Liver_RaceAndAge.csv"
-             var Total = "Total_RaceAndAge.csv"
+             var DOD = "Data/DOD_RaceAndAge.csv"
+             var nonDOD = "Data/nonDOD_RaceAndAge.csv"
+             var suicide = "Data/Suicide_RaceAndAge.csv"
+             var poisoning = "Data/Poisoning_RaceAndAge.csv"
+             var liver = "Data/Liver_RaceAndAge.csv"
+             var Total = "Data/Total_RaceAndAge.csv"
 
             // Link each button to each Csv.
             d3.select("#DOD").on("click", function(d,i){
+								d3.select("#button-wrap").selectAll("button2").classed("active", false);
+								d3.select("#button-wrap").selectAll("button").classed("active", false);
+      					d3.select("#DOD").classed("active", true);
                 update(DOD);
             })
-            d3.select("#suicide").on("click", function(d,i){
+
+						d3.select("#suicide").on("click", function(d,i){
+								d3.select("#button-wrap").selectAll("button2").classed("active", false);
+								d3.select("#button-wrap").selectAll("button").classed("active", false);
+								d3.select("#suicide").classed("active", true);
                 update(suicide);
             })
             d3.select("#poisoning").on("click", function(d,i){
+								d3.select("#button-wrap").selectAll("button2").classed("active", false);
+								d3.select("#button-wrap").selectAll("button").classed("active", false);
+								d3.select("#poisoning").classed("active", true);
                 update(poisoning);
             })
+
             d3.select("#liver").on("click", function(d,i){
-                update(liver);
+								d3.select("#button-wrap").selectAll("button2").classed("active", false);
+								d3.select("#button-wrap").selectAll("button").classed("active", false);
+								d3.select("#liver").classed("active", true);
+								update(liver);
+            })
+
+            d3.select("#nonDOD").on("click", function(d,i){
+								d3.select("#button-wrap").selectAll("button2").classed("active", false);
+								d3.select("#button-wrap").selectAll("button").classed("active", false);
+								d3.select("#nonDOD").classed("active", true);
+                update(nonDOD);
             })
             d3.select("#Total").on("click", function(d,i){
+								d3.select("#button-wrap").selectAll("button2").classed("active", false);
+								d3.select("#button-wrap").selectAll("button").classed("active", false);
+								d3.select("#Total").classed("active", true);
                 update(Total);
             })
 
-    
+
     // Setting the height and width parameters
             var fullHeight = 170;
             var fullWidth = 170;
@@ -178,7 +226,7 @@
 
 
     // Loading the Data and transforming it into arrays
- 
+
     function update(data) {
 
             // Set blank slate
@@ -220,20 +268,21 @@
                         group: d.group,
                         deaths: deathsOfDespair
                     });
-                    
+
                     indices = [0, 4, 8, 12, 16]; // Otherwise there are duplicates
 
                     if(indices.includes(i)){
                         pct_change.push({
                                 group: d.group.substr(0, d.group.indexOf(':')),
-                                change: +d.change + " %"
+                                change: d.change + "%"
                             });
                       }
-                    
+
                 });
-                
+
+                console.log(pct_change)
     // dataset = dataset.filter(({group}) => !group.includes('25'))
-            
+
 
     // Creating the reactive scaling functions
 
@@ -272,7 +321,7 @@
                                 else
                                     return "aianAll";
                                 })
-                        .attr("y",13)
+                        .attr("y", 12)
                         .text(function(d){return d.change;});
 
     //  Joining the data to the line chart element
@@ -288,7 +337,7 @@
                     .each(multiple);
 
 
-                    
+
     // Function that assigns a grouping variable to the data
 
             function multiple(group){
@@ -529,7 +578,7 @@ function drawlegend(){
                             .attr("x2", 30);
 
                         legend.append("text")
-                            .text("Asian American and Pacific Islander")
+                            .text("Asian American & Pacific Islander")
                             .attr("x",35)
                             .attr("y",13);
 
@@ -537,7 +586,7 @@ function drawlegend(){
                         var legend = d3.select("#legend svg")
                             .append("g")
                             .attr("class", "aianEth")
-                            .attr("transform","translate(500,0)");
+                            .attr("transform","translate(490,0)");
 
                         legend.append("rect")
                             .attr("width", 30)
@@ -547,7 +596,7 @@ function drawlegend(){
                             .attr("x2", 30);
 
                         legend.append("text")
-                            .text("American Indian and Alaska Native")
+                            .text("American Indian & Alaska Native")
                             .attr("x",35)
                             .attr("y",13);
                     }
