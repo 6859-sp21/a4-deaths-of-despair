@@ -27,12 +27,29 @@ h2{
 }
 
 p{
+  font-family: 'Arial', sans-serif;
   font-size: 15px;
   text-align: center;
   color: #000;
   margin-top: 40px;
   margin-bottom: 50px;
 }
+
+em{
+  font-weight: bold;
+  font-style: normal;
+}
+
+#source{
+  font-family: 'Arial', sans-serif;
+  font-size: 15px;
+  text-align: left;
+  color: #000;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+
 
 /* Button Fomatting */
 
@@ -333,6 +350,8 @@ rect.bg{
   opacity: 1.0;
   line-height: 120px;
   text-align: left;
+  margin-left: 0px;
+
   /* margin: 75px 0; */
 }
 .whiteAll{
@@ -342,6 +361,8 @@ rect.bg{
   opacity: 1.0;
   line-height: 120px;
   text-align: left;
+  margin-left: 0px;
+
   /* margin: 75px 0; */
 }
 .blackAll{
@@ -351,6 +372,8 @@ rect.bg{
   opacity: 1.0;
   line-height: 120px;
   text-align: left;
+  margin-left: 0px;
+
   /* margin: 75px 0; */
 }
 .hispAll{
@@ -360,6 +383,8 @@ rect.bg{
   opacity: 1.0;
   line-height: 120px;
   text-align: left;
+  margin-left: 0px;
+
   /* margin: 75px 0; */
 }
 .aianAll{
@@ -369,6 +394,7 @@ rect.bg{
   opacity: 1.0;
   line-height: 120px;
   text-align: left;
+  margin-left: 0px;
   /* margin: 10px 0; */
 }
 

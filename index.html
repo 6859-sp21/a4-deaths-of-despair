@@ -17,18 +17,18 @@
 	<body>
 
 		<h1> Deaths of Despair </h1>
-		<h2> Visualizing Deaths by Age-Race Groups</h2>
-        <div class="main" style=" width: 1000px; height: 700px; margin-bottom: 0px; ">
+		<h2> Visualizing Deaths by Age and Race/Ethnicity</h2>
+        <div class="main" style=" width: 1050px; height: 700px; margin-bottom: 0px; ">
 
 					<!---ADD CHART DESCRIPTION-->
 
-					<p style="text-align: center;">
-							In 2015, Anne Case and Angus Deaton showed that increases in <span style="font-weight: 700">drug overdoses, suicides,
-              and drug-or-alcohol-related liver mortality</span></br> among middle aged whites between 1999 and 2013 challenged decades of decrease in US mortality.  We revisit the data to see whether increases in these "deaths of despair"
-              are still particular to white non-Hispanic Americans. Unforunately, our more recent findings (post 2015) show that increasing rates of deaths-of-despair have become prevalent across all races, with an unsettling 99% increase among Black populations. <span style="font-weight: 700; color: #031433"></br></br> Investigate this yourself and scroll across different years per age-race group.
-								To compare how death rates vary by deaht-of-despair, click through the buttons.
-                    </br></br>
-                    <span style="font-weight: bold">The figures below show the number of deaths per 100,000 people between 2009 and 2019.</span>
+					<p style="text-align: justify;">
+							In 2015, Anne Case and Angus Deaton showed that increases over 1999-2013 in drug and alcohol poisonings, suicides, and alcohol-related liver disease among middle aged white Americans had caused their overall mortality to increase, after decades of decreases.<br>
+                            <br>
+                            We revisit the data and find that this tragic phenomenon is no longer particular to middle-aged whites. Black Americans in particular have suffered an unsettlingly high increase in these types of deaths.
+
+              <span style="font-weight: 700; color: #031433"></br></br> Explore the singular toll of these deaths of despairs across different communities using the buttons and figures below. Each figure shows the number of deaths per 100,000 people between 2009 and 2019.</span></br>
+              <span style="font-weight: bold"></span>
 					</p>
 
 					<!--ADD BUTTON-->
@@ -61,7 +61,7 @@
 
           <!-- Line Plot(s) -->
 
-          <div class="row col-sm-9 col-sm-offset-1" style="margin-left: 90px " id="lineChart"></div>
+          <div class="row col-sm-9 col-sm-offset-1" style="margin-left: 110px; margin-right: 1px;" id="lineChart"></div>
 
 					<!-- Right Column: Rates -->
 
@@ -73,17 +73,19 @@
 
 					<!-- Below Plot: Warning -->
 
-            <div class="row col-sm-10" style="margin-bottom: 30px;
+          <div class="row col-sm-10" style="margin-bottom: 30px;a
 																							margin-top: 0px;
 																							margin-left: 20px; margin-right: 0px;">
 
-						<p style="font-weight: 700; text-align: center;">If you or someone you know are in distress, please call the
-                <a href="https://suicidepreventionlifeline.org/">National Suicide Prevention Lifeline (Lifeline)</a> at 1-800-273-TALK (8255), or text the Crisis Text Line (text HELLO to 741741).</p> </br>
+					<p style="font-weight: 700; text-align: justify;">
+						If you or someone you know are in distress, please call the
+            <a href="https://suicidepreventionlifeline.org/">National Suicide Prevention Lifeline (Lifeline)</a>
+						at 1-800-273-TALK (8255), or text the Crisis Text Line (text HELLO to 741741).</p> </br>
 
         	<!-- Text to cite data sources -->
 
-            <footer class="source" style="margin-top: 0px; text-align: center;"><span style="font-family: 'Roboto', sans-serif; font-size:18px; font-weight: 700">Source</span></br>
-								</br><span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Data:</span>
+            <footer class="source" style="margin-top: 0px; text-align: center;"><span style="font-family: 'Arial', sans-serif; font-size:18px; font-weight: 700">Source</span></br>
+						</br><span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Data:</span>
 										<a href="https://www.cdc.gov/nchs/nvss/deaths.htm">NVSS Mortality Data: 2009-2019</a></br>
 								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Methodology:</span>
 										<a href="https://doi.org/10.1073/pnas.1518393112">Case, Anne, and Angus Deaton. “Rising Morbidity and Mortality in Midlife among White Non-Hispanic Americans in the 21st Century.”
@@ -91,7 +93,6 @@
 								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Code adapted from:</span>
 										<a href="https://bl.ocks.org/suneric1/c5432c5ecd181dc8b4fe">Zhiming Sun’s Block c5432c5ecd181dc8b4fe</a></br>
 
-            </footer>
             </div>
 
 		  </div>
