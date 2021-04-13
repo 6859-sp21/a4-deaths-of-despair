@@ -17,8 +17,8 @@
 	<body>
 
 		<h1> Deaths of Despair </h1>
-		<h2> Visualizing Deaths by Age and Race/Ethnicity</h2>
-        <div class="main" style=" width: 1050px; height: 700px; margin-bottom: 0px; ">
+		<h2> Visualizing The Toll by Age and Race/Ethnicity</h2>
+        <div class="main" style=" width: 1000px; height: 700px; margin-bottom: 0px; ">
 
 					<!---ADD CHART DESCRIPTION-->
 
@@ -50,16 +50,17 @@
                       <button class="button2" id="Total">Total Mortality</button>
 
 										<p style="text-align: center;
-															margin-top: 25px;
+															margin-top: 30px;
+                              line-height: 30px;
 															font-size: 16px;
-															margin-left: 610px;
+															margin-left: 630px;
 															font-family: 'Arial', sans-serif;
 									  					font-weight: bold;
-									  					width: 200px;"> Overall Rate </br> of Change </br> 2009-2019</p>
+									  					width: 220px;"> Overall Change</br>(2009-2019)</p>
 								</div>
 
 
-          <!-- Line Plot(s) -->
+             <!-- Line Plot(s) -->
 
           <div class="row col-sm-9 col-sm-offset-1" style="margin-left: 110px; margin-right: 1px;" id="lineChart"></div>
 
@@ -69,35 +70,27 @@
 
 					<!-- Below Plot: Legend -->
 
-					<div class="row col-sm-10 col-sm-offset-1" style="margin-left: 72px; margin-top: 18px" id="legend"></div>
+					<div class="row col-sm-10 col-sm-offset-1" style="margin-left: 90px; margin-top: 0px; margin-right: 50px; margin-bottom: 0px" id="legend"></div>
 
 					<!-- Below Plot: Warning -->
 
-          <div class="row col-sm-10" style="margin-bottom: 30px;a
-																							margin-top: 0px;
-																							margin-left: 20px; margin-right: 0px;">
+            <div class="row col-sm-10 col-sm-offset-1" style="margin-bottom: 0px; margin-top: 0px; margin-left: 120px; margin-right: 10px;">
+            <p style="font-weight: 700; text-align: justify; font-size: 13px;">If you or someone you know are in distress, please call the
+                <a href="https://suicidepreventionlifeline.org/">National Suicide Prevention Lifeline (Lifeline)</a> at <br>1-800-273-TALK (8255), or text the Crisis Text Line (text HELLO to 741741).</p> </br>
+            </div>
 
-					<p style="font-weight: 700; text-align: justify;">
-						If you or someone you know are in distress, please call the
-            <a href="https://suicidepreventionlifeline.org/">National Suicide Prevention Lifeline (Lifeline)</a>
-						at 1-800-273-TALK (8255), or text the Crisis Text Line (text HELLO to 741741).</p> </br>
-
-        	<!-- Text to cite data sources -->
-
-            <footer class="source" style="margin-top: 0px; text-align: center;"><span style="font-family: 'Arial', sans-serif; font-size:18px; font-weight: 700">Source</span></br>
-						</br><span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Data:</span>
+            <footer class="source" style="margin: 10px; margin-left: 135px; margin-right: 180px; text-align: left;">
+								<span style="font-family: 'Arial', sans-serif; font-size:18px; font-weight: 700">Source</span>
+								</br><span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Data:</span>
 										<a href="https://www.cdc.gov/nchs/nvss/deaths.htm">NVSS Mortality Data: 2009-2019</a></br>
 								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Methodology:</span>
 										<a href="https://doi.org/10.1073/pnas.1518393112">Case, Anne, and Angus Deaton. “Rising Morbidity and Mortality in Midlife among White Non-Hispanic Americans in the 21st Century.”
                                         </br>Proceedings of the National Academy of Sciences 112, no. 49 (December 8, 2015): 15078–83.</a></br>
-								<span style="font-family: 'Roboto', sans-serif; font-size:14px; ">Code adapted from:</span>
+								<span style="font-family: 'Roboto', sans-serif; font-size:14.5px; ">Code adapted from:</span>
 										<a href="https://bl.ocks.org/suneric1/c5432c5ecd181dc8b4fe">Zhiming Sun’s Block c5432c5ecd181dc8b4fe</a></br>
-
+							</footer>
             </div>
-
 		  </div>
-
-
 	</body>
 
 <!-- LOAD JAVASCRIPT LIBRARIES -->
