@@ -13,6 +13,7 @@ In 2017, Case and Deaton built on their initial findings with a new paper that s
 ## **Rationale for design decisions**
 
 **a) Encodings**
+
 Given the broad scope of the original paper, there were several demographic and mortality indices worth exploring for our visualization. For example, Case and Deaton had shown that the toll of deaths-of-despair varied by educational attainment, gender, and region. We decided to explore how much rates of deaths of despair were varying across race/ethnicity groups, because our findings there contrasted most with the original paper (which had found no or little increase for non-White groups). To account for the differences in each demographic group’s size, we normalized the data by each group’s total population per year then scaled it by 100,000. Thus, all ‘rates’ on our graphs represent deaths per 100,000 per group (stated in the description in bold). 
 
 To organize and communicate comparisons of deaths-of-despair between age and race/ethnicity groups, we utilized position, numeric, color, and scale encoding channels via a linked small multiples visual. Small multiples enabled us to segment our ‘story’ into simpler, digestible charts for each group. All at once, the small multiples tell the complete, and disheartening, story that deaths-of-despair have increased across all groups in the last five years. 
