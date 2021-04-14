@@ -359,7 +359,8 @@ rect.bg{
 .aapiAll{
   color: #7A6981;
   font-size: 30px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
   opacity: 1.0;
   line-height: 120px;
   text-align: left;
@@ -370,7 +371,8 @@ rect.bg{
 .whiteAll{
   color: #707F5E;
   font-size: 30px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
   opacity: 1.0;
   line-height: 120px;
   text-align: left;
@@ -381,7 +383,8 @@ rect.bg{
 .blackAll{
   color: #A5836A;
   font-size: 30px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
   opacity: 1.0;
   line-height: 120px;
   text-align: left;
@@ -392,7 +395,8 @@ rect.bg{
 .hispAll{
   color: #095E7F;
   font-size: 30px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
   opacity: 1.0;
   line-height: 120px;
   text-align: left;
@@ -403,7 +407,8 @@ rect.bg{
 .aianAll{
   color: #759ba2;
   font-size: 30px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
   opacity: 1.0;
   line-height: 120px;
   text-align: left;

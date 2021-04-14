@@ -6,8 +6,6 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="style2.css">
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Roboto:900' rel='stylesheet' type='text/css'>
 		<title>Deaths of Despair</title>
 
 	</head>
@@ -23,11 +21,11 @@
 					<!---ADD CHART DESCRIPTION-->
 
 					<p style="text-align: justify;">
-							In 2015, Anne Case and Angus Deaton showed that increases in drug and alcohol poisonings, suicides, and alcohol-related liver disease over 1999-2013 had caused the overall mortality of middle aged White Americans to increase, after decades of decreases.<br>
+							In 2015, Anne Case and Angus Deaton showed that increases in drug and alcohol poisonings, suicides, and alcohol-related liver disease between 1999-2013 had caused the overall mortality of middle-aged White Americans to increase, after decades of decreases.<br>
                             <br>
                             We revisit the data and find that this tragic phenomenon is no longer specific to White Americans. Middle-aged Black Americans in particular have suffered unsettlingly high increases in these types of deaths.
 
-              <span style="font-weight: 700; color: #031433"></br></br> Explore the singular toll of these deaths of despairs across different communities using the buttons and figures below. Each figure shows the number of deaths per 100,000 people between 2009 and 2019.</span></br>
+              <span style="font-weight: 700; color: #031433"></br></br> Explore the singular toll of these deaths of despairs across different demographic groups using the buttons and figures below. Each figure shows the number of deaths per 100,000 people between 2009 and 2019.</span></br>
               <span style="font-weight: bold"></span>
 					</p>
 
@@ -51,7 +49,7 @@
 
 										<p style="text-align: center;
 															margin-top: 30px;
-                              line-height: 30px;
+                                                             line-height: 30px;
 															font-size: 16px;
 															margin-left: 630px;
 															font-family: 'Arial', sans-serif;
@@ -100,11 +98,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stupidtable/0.0.1/stupidtable.min.js"></script>
 
-		<!-- load the function file you need before you call it... -->
-		<!-- script type="text/javascript" src="js/tabulate.js"></script -->
 
-
-<!-- JAVASCRIPT SECTION -->
+<!-- JAVASCRIPT SCRIPT -->
 
 		<script type="text/javascript">
 
@@ -196,7 +191,7 @@
                 .tickFormat(d3.format("s"))
                 .ticks(4)
                 .tickPadding([3])
-								.tickSubdivide(1)
+				.tickSubdivide(1)
                 .tickSize(-width);
 
             var area = d3.svg.area()
@@ -243,20 +238,11 @@
                 data.forEach(function(d,i){
                     var deathsOfDespair = [];
                     years.forEach(function(y){
-                        if(d[y]){
-                            deathsOfDespair.push({
+                        deathsOfDespair.push({
                                 group: d.group,
                                 year: y,
                                 amount: +d[y]
                             });
-                        }
-                        else{
-                            deathsOfDespair.push({
-                                group: d.group,
-                                year: y,
-                                amount: 0
-                            });
-                        }
                     });
 
                     dataset.push({
@@ -275,8 +261,6 @@
 
                 });
 
-                console.log(pct_change)
-    // dataset = dataset.filter(({group}) => !group.includes('25'))
 
 
     // Creating the reactive scaling functions
@@ -500,7 +484,7 @@
         }
 
 // Drawing a legend manually (Ordering by population sizes):
-function drawlegend(){
+            function drawlegend(){
 
                 // Initialize, add White Race/Ethnicity legend
                         var legend = d3.select("#legend")
