@@ -1,6 +1,6 @@
 # **Deaths of Despair**
 
-Update: note that NYMAG's Intelligencer branch conducted a similar analysis this year and provides some useful context here: https://nymag.com/intelligencer/2021/03/deaths-of-despair-have-surged-among-people-of-color.html
+Update: note that NYMAG's Intelligencer branch conducted a similar analysis this year and provides some important context here: https://nymag.com/intelligencer/2021/03/deaths-of-despair-have-surged-among-people-of-color.html
 
 ## **Context**
 
