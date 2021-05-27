@@ -1,5 +1,7 @@
 # **Deaths of Despair**
 
+Update: note that NYMAG's Intelligencer branch conducted a similar analysis this year and provides some useful context here: https://nymag.com/intelligencer/2021/03/deaths-of-despair-have-surged-among-people-of-color.html
+
 ## **Context**
 
 The goal of our project was to shed light on a ground-breaking economics paper by Anne Case and Angus Deaton. Case and Deaton first showed in 2015 that an increase in “deaths of despair” - defined as deaths related to drug and alcohol poisoning, suicide, and alcoholism-related liver disease - had challenged decades of decreases in overall US mortality rates. At the time of their study (1999-2013), these increases were specific to non-Hispanic White Americans and they were not observed in other rich countries. 
